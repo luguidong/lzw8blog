@@ -1,0 +1,28 @@
+{
+  "name": "hello-koa2",
+  "version": "1.0.0",
+  "description": "Hello Koa 2 example with async",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "koa",
+    "async"
+  ],
+  "author": "Michael Liao",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "koa": "2.0.0"
+  },
+  "devDependencies": {
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.1",
+    "mime": "^2.0.3",
+    "mysql": "^2.11.1",
+    "mz": "^2.7.0",
+    "node-uuid": "^1.4.8",
+    "nunjucks": "^3.0.1",
+    "sequelize": "^3.24.1"
+  }
+}
