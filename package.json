@@ -13,16 +13,18 @@
   "author": "Michael Liao",
   "license": "Apache-2.0",
   "dependencies": {
-    "koa": "2.0.0"
+    "koa": "2.0.0",
+    "mz": "^2.7.0",
+    "node-uuid": "^1.4.8",
+    "nunjucks": "^3.0.1",
+    "retry-as-promised": "^2.3.2",
+    "sequelize": "^3.30.4"
   },
   "devDependencies": {
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",
     "mime": "^2.0.3",
-    "mysql": "^2.11.1",
-    "mz": "^2.7.0",
-    "node-uuid": "^1.4.8",
-    "nunjucks": "^3.0.1",
-    "sequelize": "^3.24.1"
+    "ms": "^2.0.0",
+    "mysql": "^2.11.1"
   }
 }

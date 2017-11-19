@@ -1,6 +1,6 @@
 var config = {
     dialect:'mysql',
-    database:'test',
+    database:'lzw8',
     username:'root',
     password:'root',
     host:'localhost',
