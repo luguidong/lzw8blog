@@ -1,4 +1,4 @@
-let staticFiles = require('./static-files');
+let staticFiles = require('./middleware/static-files');
 const isProduction = process.env.NODE_ENV === 'production';
 //导入koa
 const Koa = require('koa');
@@ -7,17 +7,17 @@ const bodyParser = require('koa-bodyparser');
 //koa-router返回的是函数
 const router = require('koa-router')();
 //创建一个Koa对象表示web app本身
-const controller = require('./controller');
-const templating = require('./templating');
+const controller = require('./middleware/controller');
+const templating = require('./middleware/templating');
 
-const model = require('./model');
+const model = require('./middleware/model');
 //mysql操作
 const Sequelize = require('sequelize');
 const config = require('./config');
 const app = new Koa();
 
 if(!isProduction){
-    let staticFiles = require('./static-files');
+    let staticFiles = require('./middleware/static-files');
     app.use(staticFiles('/static',__dirname+'/static'));
 }
 app.use(bodyParser());

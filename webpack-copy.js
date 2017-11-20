@@ -4,12 +4,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = {
     watch:true,
     entry:{
-      main: './main',
+      './static/js/vue/index/dist/index': './static/js/vue/index/index.js',
     },
     output:{
         path: path.join(__dirname,'./'),
-        publicPath: './static/js/dist',
-        filename: 'main.js'
+        publicPath: './dist',
+        filename: '[name].min.js'
     },
     module:{
         rules: [
@@ -44,7 +44,7 @@ const config = {
         ]
     },
     plugins:[
-        new ExtractTextPlugin('/static/css/main.css')
+        new ExtractTextPlugin('/main.css')
     ]
 };
 

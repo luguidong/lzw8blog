@@ -1,5 +1,5 @@
 
-const model = require('./model.js');
+const model = require('./middleware/model.js');
 
 model.sync();
 
