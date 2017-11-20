@@ -75,7 +75,6 @@ function defineModel(name, attributes) {
             }
         }
     });
-    task.sync();
     return task;
 }
 
