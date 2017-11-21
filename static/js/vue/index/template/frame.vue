@@ -1,6 +1,6 @@
 <template>
   <div>
-      hello my node
+      hello
   </div> 
   
 </template>

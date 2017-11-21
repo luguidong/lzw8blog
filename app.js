@@ -10,6 +10,9 @@ const router = require('koa-router')();
 const controller = require('./middleware/controller');
 const templating = require('./middleware/templating');
 
+//判断是否需要登录和是否已登录状态的中间件
+const userMiddle = require('./middleware/userMiddle');
+
 const model = require('./middleware/model');
 //mysql操作
 const Sequelize = require('sequelize');
@@ -25,6 +28,8 @@ app.use(templating('views',{
     noCache:!isProduction,
     watch:!isProduction
 }))
+
+app.use(userMiddle('test'));
 app.use(controller());
 
 

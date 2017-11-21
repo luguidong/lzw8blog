@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Vuex from 'vuex';
 import Bus from './static/js/vue-bus';
 import App from './static/js/vue/app.vue';
 import './static/css/style.css';

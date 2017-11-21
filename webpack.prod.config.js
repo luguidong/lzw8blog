@@ -8,7 +8,7 @@ webpackBaseConfig.plugins = [];
 
 module.exports = merge(webpackBaseConfig,{
     output:{
-        publicPath:'/dist/',
+        publicPath:'/static/js/dist',
         filename: '[name].[hash].js'
     },
     plugins: [
@@ -27,7 +27,7 @@ module.exports = merge(webpackBaseConfig,{
             }
         }),
         new HtmlWebpackPlugin({
-            filename: '../index_prod.html',
+            filename: '../../../views/index_prod.html',
             template: './index.ejs',
             inject:false
         })

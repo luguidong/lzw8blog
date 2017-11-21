@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev":"webpack-dev-server --open --history-api-fallback --config webpack.config.js",
-    "build":"webpack --progress --hide-modules --conifg webpack.prod.config.js",
+    "build":"webpack --progress --hide-modules --config webpack.prod.config.js",
     "vue":"webpack --progress --hide-modules --config webpack.copy.js"
   },
   "keywords": [

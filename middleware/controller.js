@@ -1,5 +1,5 @@
 const fs = require('fs');
-
+const path = require('path');
 function addMapping(router,mapping){
     for(var url in mapping){
         if(url.startsWith('GET')){
@@ -17,13 +17,13 @@ function addMapping(router,mapping){
 }
 
 function addControllers(router){
-    var files = fs.readdirSync(__dirname + '/controllers');
+    var files = fs.readdirSync(path.join(__dirname , '../controllers/'));
     var js_files = files.filter((f) => {
         return f.endsWith('.js');
     })
     for (var f of js_files){
         console.log('process controller'+f);
-        let mapping = require(__dirname+'/controllers/'+f);
+        let mapping = require(path.join(__dirname , '../controllers/'+f));
         addMapping(router,mapping);
     }
 }
