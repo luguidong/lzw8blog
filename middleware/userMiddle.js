@@ -1,8 +1,9 @@
 
 function checkAuth(url){
-    return async(ctx,nextTick)=>{
+    return async(ctx,next)=>{
         let rapath = ctx.request.path;
         console.log(rapath);
+        await next();
     }
 }
 

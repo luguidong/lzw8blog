@@ -8,7 +8,7 @@ webpackBaseConfig.plugins = [];
 
 module.exports = merge(webpackBaseConfig,{
     output:{
-        publicPath:'/static/js/dist',
+        publicPath:'/static/js/dist/',
         filename: '[name].[hash].js'
     },
     plugins: [

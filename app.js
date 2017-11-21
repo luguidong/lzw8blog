@@ -1,3 +1,5 @@
+import { request } from 'http';
+
 let staticFiles = require('./middleware/static-files');
 const isProduction = process.env.NODE_ENV === 'production';
 //导入koa
@@ -18,6 +20,7 @@ const model = require('./middleware/model');
 const Sequelize = require('sequelize');
 const config = require('./config');
 const app = new Koa();
+const rest = require('./middleware/rest');
 
 if(!isProduction){
     let staticFiles = require('./middleware/static-files');
@@ -30,6 +33,7 @@ app.use(templating('views',{
 }))
 
 app.use(userMiddle('test'));
+app.use(rest.restify());
 app.use(controller());
 
 
