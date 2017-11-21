@@ -22,6 +22,18 @@ export default {
           let that = this;
           console.log(this.account);
           console.log(this.password);
+          $.ajax({
+              url:'/api/products',
+              dataType:'json',
+              type:'GET',
+              data:{
+                username:that.account,
+                password:that.password
+              },
+              success:function(){
+                
+              }
+          })
       }
   }
 }

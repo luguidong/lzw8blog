@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Bus from './static/js/vue-bus';
 import App from './static/js/vue/app.vue';
+import $ from 'n-zepto';
 import './static/css/style.css';
 
 Vue.use(VueRouter);

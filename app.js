@@ -1,4 +1,3 @@
-import { request } from 'http';
 
 let staticFiles = require('./middleware/static-files');
 const isProduction = process.env.NODE_ENV === 'production';
