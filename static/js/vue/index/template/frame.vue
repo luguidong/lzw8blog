@@ -23,15 +23,15 @@ export default {
           console.log(this.account);
           console.log(this.password);
           $.ajax({
-              url:'/api/products',
+              url:'/api/login',
               dataType:'json',
               type:'GET',
               data:{
-                username:that.account,
+                userName:that.account,
                 password:that.password
               },
-              success:function(){
-                
+              success:function(data){
+                console.log(data);
               }
           })
       }
