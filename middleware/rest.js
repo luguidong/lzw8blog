@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 module.exports = {
     APIError: function (code, message) {
         this.code = code || 'internal:unknown_error';
@@ -24,7 +26,10 @@ module.exports = {
                     };
                 }
             } else {
-                await next();
+                //await next();
+                ctx.render('../views/index_prod.html',{
+                    
+                })
             }
         };
     }

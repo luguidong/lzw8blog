@@ -31,7 +31,11 @@ var login = async(ctx,next)=>{
         }
     })();
 }
+var checkLogin = async(ctx,next)=>{
+    ctx.rest({code:0,data:{isLogin:0},msg:'登录成功'})
+}
 
 module.exports = {
-    'GET /api/login' : login
+    'GET /api/login' : login,
+    'GET /api/checkLogin' : checkLogin
 }

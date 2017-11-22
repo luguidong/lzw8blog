@@ -16,11 +16,18 @@ const Routers = [
         component:(resolve) => require(['./static/js/vue/index/template/frame.vue'],resolve)
     },
     {
-        path:'*',
+        path:'/index',
         meta:{
             title:'首页'
         },
         component:(resolve) => require(['./static/js/vue/index/template/index.vue'],resolve)
+    },
+    {
+        path:'*',
+        meta:{
+            title:'登录'
+        },
+        component:(resolve) => require(['./static/js/vue/index/template/frame.vue'],resolve)
     }
 ];
 
@@ -32,13 +39,36 @@ const RouterConfig = {
 const router = new VueRouter(RouterConfig);
 router.beforeEach((to,from,next) => {
     window.document.title = to.meta.title;
-    next();
+    //next();
     //校验登录态,next(false)可以取消导航
-    // if(window.localStorage.getItem('token')){
-    //     next();
-    // }else{
-    //     next('/login');
-    // }
+
+    console.log(to.path);
+    if(to.path == '/index'){
+        $.ajax({
+            url:'/api/checkLogin',
+            type:'GET',
+            dataType:'json',
+            data:{
+    
+            },
+            success(data){
+                if(data.data.isLogin == 0){
+                    console.log('登录成功');
+                    next();
+               }else{
+                    next('/login');
+               }
+            },
+            fail(data){
+                console.log('网络错误');
+            }
+    
+        })
+    }else{
+        next();
+    }
+    
+    
 });
 router.afterEach((to,from,next) => {
     //进入页面后回到顶部

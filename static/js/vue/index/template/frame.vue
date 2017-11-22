@@ -5,6 +5,7 @@
         <span>密码：</span>
         <input type="password" v-model="password">
         <button @click='login'>登录</button>
+        <router-link to="/index">首页</router-link>
   </div> 
   
 </template>
