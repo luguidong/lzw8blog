@@ -1,4 +1,5 @@
 var signin = async (ctx, next) => {
+    console.log(ctx.request.body);
     var
         email = ctx.request.body.email || '',
         password = ctx.request.body.password || '';

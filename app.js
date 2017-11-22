@@ -31,7 +31,7 @@ app.use(templating('views',{
     watch:!isProduction
 }))
 
-app.use(userMiddle('test'));
+app.use(userMiddle());
 app.use(rest.restify());
 app.use(controller());
 
