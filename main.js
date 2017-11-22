@@ -9,9 +9,9 @@ Vue.use(VueRouter);
 Vue.use(Bus);
 const Routers = [
     {
-        path:'/index',
+        path:'/login',
         meta:{
-          title:'首页'
+          title:'登录'
         },
         component:(resolve) => require(['./static/js/vue/index/template/frame.vue'],resolve)
     },
@@ -20,7 +20,7 @@ const Routers = [
         meta:{
             title:'首页'
         },
-        component:(resolve) => require(['./static/js/vue/index/template/frame.vue'],resolve)
+        component:(resolve) => require(['./static/js/vue/index/template/index.vue'],resolve)
     }
 ];
 

@@ -5,28 +5,29 @@ const crypto = require('crypto');
 
 function hashPass(pass){
     var hash = crypto.createHash('md5');
-    var old = hash.update(pass);
-    old = hash.digest(old);
+    hash.update(pass);
+    old = hash.digest('hex');
     return old;
 }
-var login = (ctx,next)=>{
+var login = async(ctx,next)=>{
     var param = ctx.query;
     var userName = param.userName || '',
         password = param.password || '';
     password = hashPass(password);
+    console.log(password);
     var tctx = ctx;
-    (async(ctx,next)=>{
+    await (async(ctx,next)=>{
         var users =await User.findAll({
             where:{
-                name:userName
+                name:userName,
+                passwd:password
             }
         })
         console.log(users);
-        tctx.response.type = 'application/json';
         if(users.length > 0){
-            tctx.response.body = {code:0,data:{},msg:'登录成功'};
+            tctx.rest({code:0,data:{},msg:'登录成功'});
         }else{
-            tctx.response.body = {code:0,data:{},msg:'登录失败，账号或密码错误'};
+            tctx.rest({code:0,data:{},msg:'登录失败，账号或密码错误'});
         }
     })();
 }
