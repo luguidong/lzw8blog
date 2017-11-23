@@ -27,6 +27,7 @@ module.exports = {
                 }
             } else {
                 //await next();
+                
                 ctx.render('../views/index_prod.html',{
                     
                 })

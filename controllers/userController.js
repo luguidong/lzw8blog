@@ -14,7 +14,6 @@ var login = async(ctx,next)=>{
     var userName = param.userName || '',
         password = param.password || '';
     password = hashPass(password);
-    console.log(password);
     var tctx = ctx;
     await (async(ctx,next)=>{
         var users =await User.findAll({
@@ -23,8 +22,20 @@ var login = async(ctx,next)=>{
                 passwd:password
             }
         })
-        console.log(users);
         if(users.length > 0){
+            console.log(tctx.cookies.get());
+            tctx.cookies.set(
+                'cid',
+                'hello world',
+                {
+                    domin:'localhost',
+                    path:'*',
+                    maxAge:10 * 60 *1000,
+                    expires: new Date('2017-11-24'),
+                    httpOnly:false,
+                    overwirte:false
+                }
+            )
             tctx.rest({code:0,data:{},msg:'登录成功'});
         }else{
             tctx.rest({code:0,data:{},msg:'登录失败，账号或密码错误'});
