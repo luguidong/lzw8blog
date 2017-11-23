@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Bus from './static/js/vue-bus';
+import CookieSet from './static/js/cookie-set';
 import App from './static/js/vue/app.vue';
 import $ from 'n-zepto';
 import './static/css/style.css';
 
 Vue.use(VueRouter);
+Vue.use(CookieSet);
 Vue.use(Bus);
 const Routers = [
     {
@@ -81,5 +83,7 @@ new Vue({
     router:router,
     render:h => {
        return h(App)
+    },created(){
+        console.log(this.$cookieSet);
     }
 });

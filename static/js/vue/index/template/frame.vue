@@ -11,6 +11,7 @@
 </template>
 
 <script>
+
 export default {
   data(){
       return {
@@ -18,11 +19,12 @@ export default {
           password:'',
       } 
   },
+  created:()=>{
+      //this.$bus.on('test',()=>{console.log(1)});
+  },
   methods:{
       login(){
           let that = this;
-          console.log(this.account);
-          console.log(this.password);
           $.ajax({
               url:'/api/login',
               dataType:'json',
@@ -32,7 +34,13 @@ export default {
                 password:that.password
               },
               success:function(data){
-                console.log(data);
+                
+                if(data.data.is_login == 0){
+                    //登录成功
+                    //that.$cookieSet.setCookie('sessionId',data.data.sessionId,3600);
+                }else{
+                    console.log('登录失败');
+                }
               }
           })
       }

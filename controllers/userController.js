@@ -23,22 +23,9 @@ var login = async(ctx,next)=>{
             }
         })
         if(users.length > 0){
-            console.log(tctx.cookies.get());
-            tctx.cookies.set(
-                'cid',
-                'hello world',
-                {
-                    domin:'localhost',
-                    path:'*',
-                    maxAge:10 * 60 *1000,
-                    expires: new Date('2017-11-24'),
-                    httpOnly:false,
-                    overwirte:false
-                }
-            )
-            tctx.rest({code:0,data:{},msg:'登录成功'});
+            tctx.rest({code:0,data:{is_login:0,sessionId:'12345'},msg:'登录成功'});
         }else{
-            tctx.rest({code:0,data:{},msg:'登录失败，账号或密码错误'});
+            tctx.rest({code:0,data:{is_login:1},msg:'登录失败，账号或密码错误'});
         }
     })();
 }
