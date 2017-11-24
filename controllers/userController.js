@@ -30,6 +30,7 @@ var login = async(ctx,next)=>{
     })();
 }
 var checkLogin = async(ctx,next)=>{
+    console.log(ctx.cookies.get('sessionId'));
     ctx.rest({code:0,data:{isLogin:0},msg:'登录成功'})
 }
 

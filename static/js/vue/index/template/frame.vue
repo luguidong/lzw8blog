@@ -37,7 +37,7 @@ export default {
                 
                 if(data.data.is_login == 0){
                     //登录成功
-                    //that.$cookieSet.setCookie('sessionId',data.data.sessionId,3600);
+                    that.$cookieSet.setCookie('sessionId',data.data.sessionId,3600);
                 }else{
                     console.log('登录失败');
                 }
