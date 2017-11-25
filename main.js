@@ -1,35 +1,43 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Bus from './static/js/vue-bus';
-import CookieSet from './static/js/cookie-set';
 import App from './static/js/vue/app.vue';
+
 import $ from 'n-zepto';
 import './static/css/style.css';
-
+import 'iview/dist/styles/iview.css';
+import IView from 'iview';
 Vue.use(VueRouter);
-Vue.use(CookieSet);
 Vue.use(Bus);
+Vue.use(IView);
 const Routers = [
     {
         path:'/login',
         meta:{
           title:'登录'
         },
-        component:(resolve) => require(['./static/js/vue/index/template/frame.vue'],resolve)
+        component:(resolve) => require(['./static/js/vue/index/login.vue'],resolve)
     },
     {
         path:'/index',
         meta:{
             title:'首页'
         },
-        component:(resolve) => require(['./static/js/vue/index/template/index.vue'],resolve)
+        component:(resolve) => require(['./static/js/vue/index/index.vue'],resolve)
+    },
+    {
+        path:'/user',
+        meta:{
+            title:'用户页'
+        },
+        component:(resolve) => require(['./static/js/vue/index/user.vue'],resolve)
     },
     {
         path:'*',
         meta:{
             title:'登录'
         },
-        component:(resolve) => require(['./static/js/vue/index/template/frame.vue'],resolve)
+        component:(resolve) => require(['./static/js/vue/index/login.vue'],resolve)
     }
 ];
 
@@ -43,8 +51,6 @@ router.beforeEach((to,from,next) => {
     window.document.title = to.meta.title;
     //next();
     //校验登录态,next(false)可以取消导航
-
-    console.log(to.path);
     if(to.path == '/index'){
         $.ajax({
             url:'/api/checkLogin',
@@ -83,7 +89,5 @@ new Vue({
     router:router,
     render:h => {
        return h(App)
-    },created(){
-        console.log(this.$cookieSet);
     }
 });

@@ -10,6 +10,9 @@ const router = require('koa-router')();
 //创建一个Koa对象表示web app本身
 const controller = require('./middleware/controller');
 const templating = require('./middleware/templating');
+const session = require('koa-session2');
+
+
 
 //判断是否需要登录和是否已登录状态的中间件
 const userMiddle = require('./middleware/userMiddle');
@@ -20,6 +23,17 @@ const Sequelize = require('sequelize');
 const config = require('./config');
 const app = new Koa();
 const rest = require('./middleware/rest');
+
+app.keys = ['some secret hurr'];
+const sessionConfig = {
+    key:'koa:sess',
+    maxAge:60 * 1000,
+    overwirte:true,
+    httpOnly:false,
+    signed:true,
+    rolling:false
+}
+app.use(session(sessionConfig,app));
 
 if(!isProduction){
     let staticFiles = require('./middleware/static-files');

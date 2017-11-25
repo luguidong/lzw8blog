@@ -6,6 +6,8 @@
         <input type="password" v-model="password">
         <button @click='login'>登录</button>
         <router-link to="/index">首页</router-link>
+        <router-link to="/user">用户页</router-link>
+        <Page :current="1" :total="100"></Page>
   </div> 
   
 </template>
@@ -34,10 +36,9 @@ export default {
                 password:that.password
               },
               success:function(data){
-                
                 if(data.data.is_login == 0){
                     //登录成功
-                    that.$cookieSet.setCookie('sessionId',data.data.sessionId,3600);
+                    window.location.href = '/user';
                 }else{
                     console.log('登录失败');
                 }

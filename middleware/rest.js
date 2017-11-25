@@ -27,7 +27,7 @@ module.exports = {
                 }
             } else {
                 //await next();
-                
+                //只允许返回一个页面，其它请求均走api
                 ctx.render('../views/index_prod.html',{
                     
                 })

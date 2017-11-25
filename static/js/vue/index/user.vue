@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-view></router-view>
+        这里是用户页
     </div>
 </template>
 <script>

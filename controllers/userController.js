@@ -10,6 +10,7 @@ function hashPass(pass){
     return old;
 }
 var login = async(ctx,next)=>{
+    
     var param = ctx.query;
     var userName = param.userName || '',
         password = param.password || '';
@@ -23,6 +24,9 @@ var login = async(ctx,next)=>{
             }
         })
         if(users.length > 0){
+            //登录成功，写入session，返回状态
+            let appid = users[0].id;
+            tctx.session.appid = appid;
             tctx.rest({code:0,data:{is_login:0,sessionId:'12345'},msg:'登录成功'});
         }else{
             tctx.rest({code:0,data:{is_login:1},msg:'登录失败，账号或密码错误'});
@@ -30,8 +34,12 @@ var login = async(ctx,next)=>{
     })();
 }
 var checkLogin = async(ctx,next)=>{
-    console.log(ctx.cookies.get('sessionId'));
-    ctx.rest({code:0,data:{isLogin:0},msg:'登录成功'})
+    if(ctx.session.appid){
+        ctx.rest({code:0,data:{isLogin:0},msg:'已登录'})
+    }else{
+        ctx.rest({code:0,data:{isLogin:1},msg:'未登录'})
+    }
+    
 }
 
 module.exports = {
