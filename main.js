@@ -53,7 +53,7 @@ router.beforeEach((to,from,next) => {
     //校验登录态,next(false)可以取消导航
     if(to.path == '/index'){
         $.ajax({
-            url:'/api/checkLogin',
+            url:'http://localhost:3000/api/checkLogin',
             type:'GET',
             dataType:'json',
             data:{

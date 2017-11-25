@@ -11,7 +11,8 @@ const router = require('koa-router')();
 const controller = require('./middleware/controller');
 const templating = require('./middleware/templating');
 const session = require('koa-session2');
-
+//设置允许跨域
+const cors = require('koa2-cors');
 
 
 //判断是否需要登录和是否已登录状态的中间件
@@ -33,6 +34,7 @@ const sessionConfig = {
     signed:true,
     rolling:false
 }
+app.use(cors());
 app.use(session(sessionConfig,app));
 
 if(!isProduction){

@@ -19,6 +19,7 @@ module.exports = {
                 } catch (e) {
                     console.log('Process API error...');
                     ctx.response.status = 400;
+                    
                     ctx.response.type = 'application/json';
                     ctx.response.body = {
                         code: e.code || 'internal:unknown_error',
@@ -28,9 +29,16 @@ module.exports = {
             } else {
                 //await next();
                 //只允许返回一个页面，其它请求均走api
-                ctx.render('../views/index_prod.html',{
-                    
-                })
+                if(false){
+                    ctx.render('../views/index-dev.html',{
+                        
+                    })
+                }else{
+                    ctx.render('../views/index_prod.html',{
+                        
+                    })
+                }
+                
             }
         };
     }

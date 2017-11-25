@@ -8,7 +8,7 @@ const config = {
     },
     output:{
         path: path.join(__dirname,'./static/js/dist'),
-        publicPath: '/static/js/dist',
+        publicPath: '/static/js/dist/',
         filename: 'main.js'
     },
     module:{
@@ -39,12 +39,12 @@ const config = {
             },
             {
                 test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
-                loader: 'url-loader?limit=1024'//限制大小，如果大小小于1k，则转为base64
+                loader: 'url-loader?limit=80000'//限制大小，如果大小小于1k，则转为base64
             }
         ]
     },
     plugins:[
-        new ExtractTextPlugin('/static/css/main.css')
+        new ExtractTextPlugin('main.css')
     ]
 };
 

@@ -1,13 +1,20 @@
 <template>
-  <div>
-      <span>账号：</span>
-        <input type="text" v-model="account">
+  <div class="loginCont">
+      <div class="loginBox">
+        <Alert type="error" show-icon v-if="mistake_pw">
+            An error prompt
+            <span slot="desc">
+                Custom error description copywriting.
+            </span>
+        </Alert>
+        <span>账号：</span>
+        <Input v-model="account" placeholder="账号" style="width: 200px"></Input>
+        <br><br>
         <span>密码：</span>
-        <input type="password" v-model="password">
-        <button @click='login'>登录</button>
-        <router-link to="/index">首页</router-link>
-        <router-link to="/user">用户页</router-link>
-        <Page :current="1" :total="100"></Page>
+        <Input v-model="password" placeholder="密码" type="password" style="width: 200px"></Input>
+        <br><br>
+        <i-button @click="login" type="primary" style="width:240px">登录</i-button>
+    </div>
   </div> 
   
 </template>
@@ -19,6 +26,7 @@ export default {
       return {
           account:'',
           password:'',
+          mistake_pw:false
       } 
   },
   created:()=>{
@@ -28,7 +36,7 @@ export default {
       login(){
           let that = this;
           $.ajax({
-              url:'/api/login',
+              url:'http://localhost:3000/api/login',
               dataType:'json',
               type:'GET',
               data:{
@@ -38,8 +46,13 @@ export default {
               success:function(data){
                 if(data.data.is_login == 0){
                     //登录成功
+                    console.log('登录成功');
                     window.location.href = '/user';
                 }else{
+                    that.mistake_pw = true;
+                    setTimeout(function(){
+                        that.mistake_pw = false;
+                    },2000);
                     console.log('登录失败');
                 }
               }
@@ -48,4 +61,22 @@ export default {
   }
 }
 </script>
+<style scoped>
+    .loginCont{
+        width:100%;
+        height: 100%;
+        display: flex;
+        position: absolute;
+        left: 0;
+        top:0;
+        align-items: center;
+        justify-content:center;
+        
+    }
+    .loginBox{
+        width:300px;
+        height: auto;
+        text-align: center;
+    }
+</style>
 
