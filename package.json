@@ -5,9 +5,11 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "webpack-dev-server --open --history-api-fallback --config webpack.config.js",
-    "build": "webpack --progress --hide-modules --config webpack.prod.config.js",
-    "vue": "webpack --progress --hide-modules --config webpack.copy.js"
+    "dev": "webpack-dev-server --open --history-api-fallback --config build/webpack.views.dev.js",
+    "dev_admin": "webpack-dev-server --open --history-api-fallback --config build/webpack.admin.dev.js",
+    "build": "webpack --progress --hide-modules --config build/webpack.views.prod.js",
+    "build_admin":"webpack --progress --hide-modules --config build/webpack.admin.prod.js",
+    "vue": "webpack --progress --hide-modules --config build/webpack.copy.js"
   },
   "keywords": [
     "koa",
@@ -16,6 +18,7 @@
   "author": "Michael Liao",
   "license": "Apache-2.0",
   "dependencies": {
+    "axios": "^0.17.1",
     "iview": "^2.7.3",
     "koa": "2.0.0",
     "koa-session2": "^2.2.5",

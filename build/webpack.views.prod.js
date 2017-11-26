@@ -2,12 +2,13 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
-const webpackBaseConfig = require('./webpack.config');
-
+const webpackBaseConfig = require('./webpack.views.dev');
+const path = require('path');
 webpackBaseConfig.plugins = [];
 
 module.exports = merge(webpackBaseConfig,{
     output:{
+        path: path.join(__dirname,'../static/js/dist'),
         publicPath:'/static/js/dist/',
         filename: '[name].[hash].js'
     },
@@ -27,8 +28,8 @@ module.exports = merge(webpackBaseConfig,{
             }
         }),
         new HtmlWebpackPlugin({
-            filename: '../../../views/index_prod.html',
-            template: './index.ejs',
+            filename: '../../../views/views.html',
+            template: './views/index.ejs',
             inject:false
         })
     ]

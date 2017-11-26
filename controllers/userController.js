@@ -34,6 +34,7 @@ var login = async(ctx,next)=>{
     })();
 }
 var checkLogin = async(ctx,next)=>{
+    console.log(ctx.session.appid);
     if(ctx.session.appid){
         ctx.rest({code:0,data:{isLogin:0},msg:'已登录'})
     }else{

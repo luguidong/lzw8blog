@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const uuid = require('node-uuid');
 
-const config = require('./config');
+const config = require('./config/config');
 
 
 function generateId() {

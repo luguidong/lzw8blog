@@ -29,12 +29,19 @@ module.exports = {
             } else {
                 //await next();
                 //只允许返回一个页面，其它请求均走api
-                if(false){
-                    ctx.render('../views/index-dev.html',{
-                        
-                    })
+                console.log(ctx.request.path);
+                if(ctx.request.path.startsWith('/admin')){
+                    if(ctx.session.appid) {
+                        ctx.render('../views/admin.html',{
+                            
+                        })
+                    }else{
+                        ctx.render('../views/views.html',{
+                            
+                        })
+                    }               
                 }else{
-                    ctx.render('../views/index_prod.html',{
+                    ctx.render('../views/views.html',{
                         
                     })
                 }
