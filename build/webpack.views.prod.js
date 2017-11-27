@@ -7,7 +7,7 @@ const path = require('path');
 webpackBaseConfig.plugins = [];
 
 module.exports = merge(webpackBaseConfig,{
-    output:{
+    output:{ 
         path: path.join(__dirname,'../static/js/dist'),
         publicPath:'/static/js/dist/',
         filename: '[name].[hash].js'

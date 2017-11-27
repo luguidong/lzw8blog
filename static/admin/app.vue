@@ -1,16 +1,15 @@
 <template>
     <div>
-        <div class="container_left">
-            <side_bar :theme = "light"></side_bar>
-        </div>
+        <side_bar ></side_bar>
         <div class="container_right">
-            <div>这里是头部</div>
+            <nav_bar> 这里是头部</nav_bar>
             <router-view></router-view>
         </div>
     </div>
 </template>
 <script>
-    import side_bar from './index/sideBar.vue';
+    import side_bar from './common/sideBar.vue';
+    import nav_bar from './common/nav.vue';
     export default{
         data(){
             return {
@@ -18,21 +17,14 @@
             }
         },
         components:{
-            side_bar
+            side_bar,
+            nav_bar
         }
     }
 </script>
 <style>
-.container_left{
-    width:200px;
-    position: fixed;
-    left: 0;
-    top:0;
-    background:#fff;
-}
 .container_right{
     box-sizing: border-box;
     padding-left: 200px;
-    background:#d8d8d8;
 }
 </style>
