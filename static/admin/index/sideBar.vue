@@ -22,12 +22,7 @@
             </Menu-item>
         </Menu-group>
     </Menu>
-    <br>
-    <p>切换主题</p>
-    <Radio-group :model.sync="theme3">
-        <Radio value="light"></Radio>
-        <Radio value="dark"></Radio>
-    </Radio-group>
+    
 </div>
 </template>
 <script>
@@ -36,7 +31,7 @@
         props:['theme'],
         data () {
             return {
-                theme2: 'black'
+                theme3: 'black'
             }
         }
     }

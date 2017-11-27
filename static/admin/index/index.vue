@@ -7,9 +7,7 @@
   
   export default {
     data(){
-      return {
-        light:'light'
-      }
+      
     }
   }
 </script>

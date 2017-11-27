@@ -1,14 +1,10 @@
 <template>
     <div>
-        <div>
-            <Row>
-                <i-col :xs="2" :sm="4" :md="6" :lg="8">
-                <side_bar :theme = "light"></side_bar>
-                </i-col>
-                <i-col :xs="20" :sm="16" :md="12" :lg="8">Col</i-col>   
-            </Row>
+        <div class="container_left">
+            <side_bar :theme = "light"></side_bar>
         </div>
-        <div>
+        <div class="container_right">
+            <div>这里是头部</div>
             <router-view></router-view>
         </div>
     </div>
@@ -26,3 +22,17 @@
         }
     }
 </script>
+<style>
+.container_left{
+    width:200px;
+    position: fixed;
+    left: 0;
+    top:0;
+    background:#fff;
+}
+.container_right{
+    box-sizing: border-box;
+    padding-left: 200px;
+    background:#d8d8d8;
+}
+</style>
