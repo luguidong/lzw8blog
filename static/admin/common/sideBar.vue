@@ -2,14 +2,14 @@
 <div class="side_bar_con">
     <Row> 
         <i-col span="8">
-            <Menu width='200px' :theme="theme2" active-key="1-2" :open-keys="['1']" name='menu'>
+            <Menu @on-click="handleClickUserDropdown" width='200px' :theme="theme2" active-key="1-2" :open-keys="['1']" name='menu' :accordion="true">
                 <Submenu key="1" name='1'>
                     <template slot="title">
                         <Icon type="ios-paper"></Icon>
                         内容管理
                     </template>
-                    <Menu-item key="1-1" name='1-1'>文章管理</Menu-item>
-                    <Menu-item key="1-2" name='1-2'>评论管理</Menu-item>
+                    <Menu-item key="1-1" name='article_manage'>文章管理</Menu-item>
+                    <Menu-item key="1-2" name='comment_manage'>评论管理</Menu-item>
                     <Menu-item key="1-3" name='1-3'>举报管理</Menu-item>
                 </Submenu>
                 <Submenu key="2" name='2'>
@@ -41,22 +41,37 @@
 </div>
 </template>
 <script>
-    export default {
-        data () {
-            return {
-                theme2: 'dark'
-            }
-        }
+export default {
+  data() {
+    return {
+      theme2: "dark"
+    };
+  },
+  methods: {
+    handleClickUserDropdown(name) {
+      console.log("点击事件" + name);
+      if (name === "article_manage") {
+        util.openNewPage(this, "admin/index");
+        this.$router.push({
+          name: "admin/index"
+        });
+      } else if (name === "comment_manage") {
+        util.openNewPage(this, "admin/comment");
+        this.$router.push({
+          name: "admin/comment"
+        });
+      }
     }
+  }
+};
 </script>
 <style scoped>
-.side_bar_con{
-    width:200px;
-    position: fixed;
-    left: 0;
-    top:0;
-    bottom:0;
-    background:#495060;
+.side_bar_con {
+  width: 200px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: #495060;
 }
-
 </style>

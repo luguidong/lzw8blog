@@ -1,0 +1,13 @@
+{
+    "brace_style": "none,preserve-inline",
+    "indent_size": 1,
+    "indent_char": "    ",
+    "jslint_happy": true,
+    "unformatted": ["<script>"],
+    "css": {
+        "indent_size": 1
+    },
+    "js": {
+        "indent_size": 1
+    }
+}
