@@ -15,27 +15,34 @@ Vue.use(Bus);
 Vue.use(NetWork);
 Vue.use(iView);
 const Routers = [
-{
-    path: '/admin/index',
-    meta: {
-        title: '首页'
+    {
+        path: '/admin/index',
+        meta: {
+            title: '首页'
+        },
+        component: (resolve) => require(['./static/admin/article/article_list.vue'], resolve)
     },
-    component: (resolve) => require(['./static/admin/index/index.vue'], resolve)
-},
-{
-    path: '/admin/comment',
-    meta: {
-        title: '评论'
+    {
+        path: '/admin/comment',
+        meta: {
+            title: '评论'
+        },
+        component: (resolve) => require(['./static/admin/comments/comment.vue'], resolve)
     },
-    component: (resolve) => require(['./static/admin/comments/comment.vue'], resolve)
-},
-{
-    path: '*',
-    meta: {
-        title: '首页'
+    {
+        path: '/admin/create_article',
+        meta: {
+            title: '新建文章'
+        },
+        component: (resolve) => require(['./static/admin/article/edit_article.vue'], resolve)
     },
-    component: (resolve) => require(['./static/admin/index/index.vue'], resolve)
-}];
+    {
+        path: '*',
+        meta: {
+            title: '首页'
+        },
+        component: (resolve) => require(['./static/admin/article/article_list.vue'], resolve)
+    }];
 
 const RouterConfig = {
     mode: 'history', //hash，通过改变浏览器地址栏且不跳转改变页面
