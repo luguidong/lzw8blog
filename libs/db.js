@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const uuid = require('node-uuid');
 
-const config = require('./config/config');
+const config = require('../config/config');
 
 
 function generateId() {
@@ -12,7 +12,7 @@ function generateId() {
 var sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
     dialect: config.dialect,
-    port:config.port,
+    port: config.port,
     pool: {
         max: 5,
         min: 0,
@@ -26,7 +26,7 @@ function defineModel(name, attributes) {
     var attrs = {};
     for (let key in attributes) {
         let value = attributes[key];
-        
+
         if (typeof value === 'object' && value['type']) {
             value.allowNull = value.allowNull || false;
             attrs[key] = value;
