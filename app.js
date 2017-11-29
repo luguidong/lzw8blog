@@ -1,4 +1,3 @@
-
 let staticFiles = require('./middleware/static-files');
 const isProduction = process.env.NODE_ENV === 'production';
 //导入koa
@@ -27,37 +26,36 @@ const rest = require('./middleware/rest');
 
 app.keys = ['some secret hurr'];
 const sessionConfig = {
-    key:'koa:sess',
-    maxAge:60 * 60 * 1000,
-    overwirte:true,
-    httpOnly:false,
-    signed:true,
-    rolling:false
+    key: 'koa:sess',
+    maxAge: 60 * 60 * 1000,
+    overwirte: true,
+    httpOnly: false,
+    signed: true,
+    rolling: false
 }
 app.use(cors({
     origin: function (ctx) {
         if (ctx.url === '/test') {
-                    return "*"; // 允许来自所有域名请求
-                }
-                return 'http://localhost:8080'; // 这样就能只允许 http://localhost:8080 这个域名的请求了
-            },
-            exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
-            maxAge: 5,
-            credentials: true,
-            allowMethods: ['GET', 'POST', 'DELETE'],
-            allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+            return "*"; // 允许来自所有域名请求
         }
-));
-app.use(session(sessionConfig,app));
+        return 'http://localhost:8080'; // 这样就能只允许 http://localhost:8080 这个域名的请求了
+    },
+    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+    maxAge: 5,
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'DELETE'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+}));
+app.use(session(sessionConfig, app));
 
-if(!isProduction){
+if (!isProduction) {
     let staticFiles = require('./middleware/static-files');
-    app.use(staticFiles('/static',__dirname+'/static'));
+    app.use(staticFiles('/static', __dirname + '/static'));
 }
 app.use(bodyParser());
-app.use(templating('views',{
-    noCache:!isProduction,
-    watch:!isProduction
+app.use(templating('views', {
+    noCache: !isProduction,
+    watch: !isProduction
 }))
 
 app.use(userMiddle());
