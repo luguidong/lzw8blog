@@ -79,7 +79,11 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.$Message.success("Success!");
+          let params = {};
+          for (var item in this.formValidate) {
+            params[item] = this.formValidate[item];
+          }
+          console.log(params);
         } else {
           this.$Message.error("Fail!");
         }
