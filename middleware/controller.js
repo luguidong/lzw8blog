@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+
 function addMapping(router, mapping) {
     for (var url in mapping) {
         if (url.startsWith('GET')) {
@@ -20,7 +21,7 @@ function addControllers(router) {
         if (f)
             return f.endsWith('.js');
     })
-    forEeachWithEnd(path.join(__dirname, '../controllers/'), '.js');
+    console.log(forEeachWithEnd(path.join(__dirname, '../controllers/'), '.js'));
     for (var f of js_files) {
         let mapping = require(path.join(__dirname, '../controllers/' + f));
         addMapping(router, mapping);
@@ -33,25 +34,30 @@ function addControllers(router) {
  * @returns files[]
  */
 function forEeachWithEnd(dirname, ends) {
+    var fileColl = [];
     fs.readdir(dirname, function (err, files) {
         if (err) {
-
+            console.log('file warn' + err);
         } else {
             files.forEach(function (filename) {
                 var dir = path.join(dirname, filename);
                 fs.stat(dir, function (err, stats) {
-                    if (err) { } else {
+                    if (err) {
+                        console.log('file warn' + err);
+                    } else {
                         if (stats.isFile()) {
-                            console.log('wj' + dir)
+                            fileColl.push(dir);
                         } else if (stats.isDirectory()) {
-                            console.log('ml' + dir)
+                            var c = forEeachWithEnd(dir, ends);
+                            fileColl.push.apply(fileColl, c);
                         }
+
                     }
                 });
             });
         }
     });
-
+    return fileColl;
 }
 
 module.exports = function (dir) {
