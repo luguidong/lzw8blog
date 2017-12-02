@@ -16,34 +16,35 @@ function addMapping(router, mapping) {
         }
     }
 }
-var controllerFiles = [];
+
 function addControllers(router) {
-    var files = fs.readdirSync(path.join(__dirname, '../controllers/'));
-    var js_files = files.filter((f) => {
-        if (f)
-            return f.endsWith('.js');
-    })
-    ScanDir(path.join(__dirname, '../controllers/'), '.js')
-    for (var f of controllerFiles) {
+    var jsFiles = getFilesWinthEnd(path.join(__dirname, '../controllers/'), '.js')
+    for (var f of jsFiles) {
         let mapping = require(f);
         addMapping(router, mapping);
     }
 }
 
-function ScanDir(path, ends) {
-    let that = this;
-    if (fs.statSync(path).isFile()) {
-        if (path.endsWith(ends)) {
-            controllerFiles.push(path);
+function getFilesWinthEnd(path, ends) {
+    var controllerFiles = [];
+    ScanDir(path, ends);
+
+    function ScanDir(path, ends) {
+        let that = this;
+        if (fs.statSync(path).isFile()) {
+            if (path.endsWith(ends)) {
+                controllerFiles.push(path);
+            }
         }
-    }
-    try {
-        fs.readdirSync(path).forEach(function (file) {
-            ScanDir.call(that, path + '/' + file, ends);
-        })
-    } catch (e) {
-    }
+        try {
+            fs.readdirSync(path).forEach(function (file) {
+                ScanDir.call(that, path + '/' + file, ends);
+            })
+        } catch (e) {}
+    };
+    return controllerFiles;
 }
+
 
 /**
  * 递归遍历文件夹的所有满足后缀的文件,练手代码，废弃
