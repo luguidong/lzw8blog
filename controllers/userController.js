@@ -8,14 +8,15 @@ function hashPass(pass) {
     old = hash.digest('hex');
     return old;
 }
-var login = async(ctx, next) => {
+var login = async (ctx, next) => {
 
     var param = ctx.query;
     var userName = param.userName || '',
         password = param.password || '';
     password = hashPass(password);
     var tctx = ctx;
-    await (async(ctx, next) => {
+
+    await (async (ctx, next) => {
         var users = await User.findAll({
             where: {
                 name: userName,
@@ -32,8 +33,7 @@ var login = async(ctx, next) => {
         }
     })();
 }
-var checkLogin = async(ctx, next) => {
-    console.log(ctx.session.appid);
+var checkLogin = async (ctx, next) => {
     if (ctx.session.appid) {
         ctx.rest({ code: 0, data: { isLogin: 0 }, msg: '已登录' })
     } else {

@@ -18,8 +18,9 @@ module.exports = {
                     await next();
                 } catch (e) {
                     console.log('Process API error...');
+                    console.log(e);
                     ctx.response.status = 400;
-                    
+
                     ctx.response.type = 'application/json';
                     ctx.response.body = {
                         code: e.code || 'internal:unknown_error',
@@ -30,22 +31,22 @@ module.exports = {
                 //await next();
                 //只允许返回一个页面，其它请求均走api
                 console.log(ctx.request.path);
-                if(ctx.request.path.startsWith('/admin')){
-                    if(ctx.session.appid) {
-                        ctx.render('../views/admin.html',{
-                            
+                if (ctx.request.path.startsWith('/admin')) {
+                    if (ctx.session.appid) {
+                        ctx.render('../views/admin.html', {
+
                         })
-                    }else{
-                        ctx.render('../views/views.html',{
-                            
+                    } else {
+                        ctx.render('../views/views.html', {
+
                         })
-                    }               
-                }else{
-                    ctx.render('../views/views.html',{
-                        
+                    }
+                } else {
+                    ctx.render('../views/views.html', {
+
                     })
                 }
-                
+
             }
         };
     }

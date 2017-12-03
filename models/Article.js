@@ -4,6 +4,10 @@ module.exports = db.defineModel('article', {
         type: db.STRING(80)
     },
     intro: db.STRING(200),
-    tags: db.INTEGER,
+    tags: {
+        type: db.STRING(200),
+        allowNull: true,
+        defaultValue: ''
+    },
     desc: db.TEXT
 })

@@ -8,8 +8,8 @@
             <Input v-model="formValidate.intro" placeholder="Enter your e-mail"></Input>
         </FormItem>
     
-        <FormItem label="标签" prop="flag">
-            <CheckboxGroup v-model="formValidate.flag">
+        <FormItem label="标签" prop="tags">
+            <CheckboxGroup v-model="formValidate.tags">
                 <Checkbox label="js"></Checkbox>
                 <Checkbox label="node"></Checkbox>
                 <Checkbox label="php"></Checkbox>
@@ -33,7 +33,7 @@ export default {
       formValidate: {
         title: "",
         intro: "",
-        flag: [],
+        tags: [],
         desc: ""
       },
       ruleValidate: {
@@ -45,7 +45,7 @@ export default {
           }
         ],
         intro: [],
-        flag: [
+        tags: [
           {
             required: true,
             type: "array",
@@ -67,8 +67,8 @@ export default {
           },
           {
             type: "string",
-            min: 20,
-            message: "Introduce no less than 20 words",
+            min: 5,
+            message: "Introduce no less than 5 words",
             trigger: "blur"
           }
         ]
@@ -83,7 +83,17 @@ export default {
           for (var item in this.formValidate) {
             params[item] = this.formValidate[item];
           }
-          console.log(params);
+          params.tags = JSON.stringify(params.tags);
+          this.$netWork.post("/api/createArticle", params, data => {
+            if (data.code == 0) {
+              this.$Message.success("创建创建成功");
+              setTimeout(() => {
+                this.$router.push("/admin/article_list");
+              }, 1500);
+            } else {
+              this.$Message.error("网络异常，请刷新后重试");
+            }
+          });
         } else {
           this.$Message.error("Fail!");
         }
