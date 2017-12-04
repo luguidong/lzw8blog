@@ -15,49 +15,36 @@ export default {
     return {
       columns1: [
         {
-          title: "Name",
-          key: "name"
+          title: "Title",
+          key: "title"
         },
         {
-          title: "Age",
-          key: "age"
+          title: "Intro",
+          key: "intro"
         },
         {
-          title: "Address",
-          key: "address"
+          title: "Tags",
+          key: "tags"
         }
       ],
-      data1: [
-        {
-          name: "John Brown",
-          age: 18,
-          address: "New York No. 1 Lake Park",
-          date: "2016-10-03"
-        },
-        {
-          name: "Jim Green",
-          age: 24,
-          address: "London No. 1 Lake Park",
-          date: "2016-10-01"
-        },
-        {
-          name: "Joe Black",
-          age: 30,
-          address: "Sydney No. 1 Lake Park",
-          date: "2016-10-02"
-        },
-        {
-          name: "Jon Snow",
-          age: 26,
-          address: "Ottawa No. 2 Lake Park",
-          date: "2016-10-04"
-        }
-      ]
+      data1: []
     };
+  },
+  created() {
+    this.getArticleList();
   },
   methods: {
     createArticle() {
       this.$router.push("/admin/create_article");
+    },
+    getArticleList() {
+      this.$netWork.get("/api/articleList", {}, data => {
+        if (data.code == 0) {
+          this.data1 = data.data;
+        } else {
+          this.$Message.err("网络错误，请刷新后重试");
+        }
+      });
     }
   }
 };

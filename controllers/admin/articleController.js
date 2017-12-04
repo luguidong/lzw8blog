@@ -1,12 +1,20 @@
 //文章新建、编辑与列表
 let Article = require('../../models/Article');
-function articleList() {
+var articleList = async(ctx, next) => {
+    var articles = await Article.findAll({
+
+    }).then((articles) => {
+        ctx.rest({ code: 0, data: articles, msg: '' });
+    }).catch((err) => {
+        console.log(err);
+    })
 
 }
+
 function editArticle() {
 
 }
-var createArticle = async (ctx, next) => {
+var createArticle = async(ctx, next) => {
     var col = ctx.request.body;
     var { title, intro, tags, desc } = col;
     var params = {
@@ -16,7 +24,7 @@ var createArticle = async (ctx, next) => {
         desc: desc || ''
     };
     var tctx = ctx;
-    await (async (ctx, next) => {
+    await (async(ctx, next) => {
         await Article.create(params).then(function () {
             console.log('创建文章成功');
             tctx.rest({ code: 0, data: {}, msg: '创建文章成功' });
