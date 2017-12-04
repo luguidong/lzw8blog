@@ -3,17 +3,15 @@ let Article = require('../../models/Article');
 var articleList = async(ctx, next) => {
     var articles = await Article.findAll({
 
+
     }).then((articles) => {
         ctx.rest({ code: 0, data: articles, msg: '' });
     }).catch((err) => {
         console.log(err);
     })
-
 }
 
-function editArticle() {
-
-}
+function editArticle() {}
 var createArticle = async(ctx, next) => {
     var col = ctx.request.body;
     var { title, intro, tags, desc } = col;

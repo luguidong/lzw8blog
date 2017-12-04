@@ -4,8 +4,6 @@
             <Icon type="plus-round" size="14" color="#fff" />
             新建文章
         </Button>
-        
-        
         <Table stripe :columns="columns1" :data="data1"></Table>
     </div>
 </template>
