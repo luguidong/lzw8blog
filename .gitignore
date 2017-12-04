@@ -1,2 +1,4 @@
 node_modules
 static/js/dist
+views
+views/admin.html

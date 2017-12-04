@@ -4,7 +4,7 @@
   "description": "Hello Koa 2 example with async",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon",
     "dev": "webpack-dev-server --open --history-api-fallback --config build/webpack.views.dev.js",
     "dev_admin": "webpack-dev-server --open --history-api-fallback --config build/webpack.admin.dev.js",
     "build": "webpack --progress --hide-modules --config build/webpack.views.prod.js",
@@ -27,6 +27,7 @@
     "mz": "^2.7.0",
     "node-uuid": "^1.4.8",
     "nunjucks": "^3.0.1",
+    "redis": "^2.8.0",
     "retry-as-promised": "^2.3.2",
     "sequelize": "^3.30.4"
   },
