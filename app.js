@@ -12,15 +12,7 @@ const templating = require('./middleware/templating');
 const session = require('koa-session2');
 //设置允许跨域
 const cors = require('koa2-cors');
-const Redis = require('ioredis');
 
-const redis = new Redis({
-    host: '127.0.0.1',
-    port: '6379',
-    prefix: 'sam:',
-    ttl: 60 * 60 * 8, //过期时间
-    db: 0
-})
 
 //判断是否需要登录和是否已登录状态的中间件
 const userMiddle = require('./middleware/userMiddle');
@@ -33,6 +25,7 @@ const app = new Koa();
 const rest = require('./middleware/rest');
 
 app.keys = ['some secret hurr'];
+const Store = require("./libs/Store.js");
 const sessionConfig = {
     key: 'koa:sess',
     maxAge: 60 * 60 * 1000,
@@ -41,6 +34,10 @@ const sessionConfig = {
     signed: true,
     rolling: false
 }
+app.use(session({
+    store: new Store()
+}));
+
 app.use(cors({
     origin: function (ctx) {
         if (ctx.url === '/test') {
@@ -54,7 +51,7 @@ app.use(cors({
     allowMethods: ['GET', 'POST', 'DELETE'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }));
-app.use(session(sessionConfig, app));
+
 
 if (!isProduction) {
     let staticFiles = require('./middleware/static-files');

@@ -15,7 +15,6 @@ var login = async (ctx, next) => {
         password = param.password || '';
     password = hashPass(password);
     var tctx = ctx;
-
     await (async (ctx, next) => {
         var users = await User.findAll({
             where: {
