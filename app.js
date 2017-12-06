@@ -12,7 +12,15 @@ const templating = require('./middleware/templating');
 const session = require('koa-session2');
 //设置允许跨域
 const cors = require('koa2-cors');
+const Redis = require('ioredis');
 
+const redis = new Redis({
+    host: '127.0.0.1',
+    port: '6379',
+    prefix: 'sam:',
+    ttl: 60 * 60 * 8, //过期时间
+    db: 0
+})
 
 //判断是否需要登录和是否已登录状态的中间件
 const userMiddle = require('./middleware/userMiddle');

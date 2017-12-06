@@ -16,7 +16,6 @@ client.on('connect', () => {
             console.log(res);
         }
     })
-
     console.log('connect');
 })
 client.on('ready', function (err) {
