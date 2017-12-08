@@ -4,7 +4,7 @@
             <Icon type="plus-round" size="14" color="#fff" />
             新建文章
         </Button>
-        <Table stripe :columns="columns1" :data="data1"></Table>
+        <Table stripe :columns="columns1" :data="articleList"></Table>
     </div>
 </template>
 <script>
@@ -25,7 +25,7 @@ export default {
           key: "tags"
         }
       ],
-      data1: []
+      articleList: []
     };
   },
   created() {
@@ -38,7 +38,10 @@ export default {
     getArticleList() {
       this.$netWork.get("/api/articleList", {}, data => {
         if (data.code == 0) {
-          this.data1 = data.data;
+          this.articleList = data.data;
+          this.articleList.forEach((item, index) => {
+            this.articleList[index].tags = JSON.parse(item.tags).join(",");
+          });
         } else {
           this.$Message.err("网络错误，请刷新后重试");
         }
