@@ -5,6 +5,8 @@
             新建文章
         </Button>
         <Table stripe :columns="columns1" :data="articleList"></Table>
+        <p>测试子路由</p>
+        <router-view></router-view>
     </div>
 </template>
 <script>
@@ -40,7 +42,9 @@ export default {
         if (data.code == 0) {
           this.articleList = data.data;
           this.articleList.forEach((item, index) => {
-            this.articleList[index].tags = JSON.parse(item.tags).join(",");
+            if (item.tags) {
+              this.articleList[index].tags = JSON.parse(item.tags).join(",");
+            }
           });
         } else {
           this.$Message.err("网络错误，请刷新后重试");

@@ -9,44 +9,15 @@ import NetWork from './static/js/libs/net-work'
 import './static/css/style.css';
 import 'iview/dist/styles/iview.css';
 import iView from 'iview';
-
+import routers from './static/admin/router';
 Vue.use(VueRouter);
 Vue.use(Bus);
 Vue.use(NetWork);
 Vue.use(iView);
-const Routers = [
-    {
-        path: '/admin/index',
-        meta: {
-            title: '首页'
-        },
-        component: (resolve) => require(['./static/admin/article/article_list.vue'], resolve)
-    },
-    {
-        path: '/admin/comment',
-        meta: {
-            title: '评论'
-        },
-        component: (resolve) => require(['./static/admin/comments/comment.vue'], resolve)
-    },
-    {
-        path: '/admin/create_article',
-        meta: {
-            title: '新建文章'
-        },
-        component: (resolve) => require(['./static/admin/article/edit_article.vue'], resolve)
-    },
-    {
-        path: '*',
-        meta: {
-            title: '首页'
-        },
-        component: (resolve) => require(['./static/admin/article/article_list.vue'], resolve)
-    }];
 
 const RouterConfig = {
     mode: 'history', //hash，通过改变浏览器地址栏且不跳转改变页面
-    routes: Routers
+    routes: routers
 };
 
 const router = new VueRouter(RouterConfig);
