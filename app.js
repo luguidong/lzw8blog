@@ -24,16 +24,8 @@ const Sequelize = require('sequelize');
 const app = new Koa();
 const rest = require('./middleware/rest');
 
-app.keys = ['some secret hurr'];
+//session持久化
 const Store = require("./libs/Store.js");
-const sessionConfig = {
-    key: 'koa:sess',
-    maxAge: 60 * 60 * 1000,
-    overwirte: true,
-    httpOnly: false,
-    signed: true,
-    rolling: false
-}
 app.use(session({
     store: new Store()
 }));
