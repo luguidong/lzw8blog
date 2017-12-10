@@ -5,8 +5,6 @@
             新建文章
         </Button>
         <Table stripe :columns="columns1" :data="articleList"></Table>
-        <p>测试子路由</p>
-        <router-view></router-view>
     </div>
 </template>
 <script>
@@ -25,6 +23,28 @@ export default {
         {
           title: "Tags",
           key: "tags"
+        },
+        {
+          title: "operate",
+          render: (h, params) => {
+            return h("div", [
+              h(
+                "Button",
+                {
+                  props: {
+                    type: "primary",
+                    value: params.row.tags
+                  },
+                  on: {
+                    click: () => {
+                      this.editArticle(params.row.id);
+                    }
+                  }
+                },
+                "编辑"
+              )
+            ]);
+          }
         }
       ],
       articleList: []
@@ -50,6 +70,9 @@ export default {
           this.$Message.err("网络错误，请刷新后重试");
         }
       });
+    },
+    editArticle(id) {
+      this.$router.push("/admin/edit_article/" + id);
     }
   }
 };

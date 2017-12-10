@@ -75,6 +75,11 @@ export default {
       }
     };
   },
+  created() {
+    if (this.$route.params.id) {
+      this.getArticleInfo(this.$route.params.id);
+    }
+  },
   methods: {
     handleSubmit(name) {
       this.$refs[name].validate(valid => {
@@ -101,6 +106,17 @@ export default {
     },
     handleReset(name) {
       this.$refs[name].resetFields();
+    },
+    getArticleInfo(id) {
+      this.$netWork.get("/api/getArticleInfo", { id: id }, data => {
+        console.log(data.data);
+        if (data.data.tags != "") {
+          data.data.tags = JSON.parse(data.data.tags);
+        } else {
+          data.data.tags = [];
+        }
+        this.formValidate = data.data;
+      });
     }
   }
 };
