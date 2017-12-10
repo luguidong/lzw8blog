@@ -109,10 +109,9 @@ export default {
     },
     getArticleInfo(id) {
       this.$netWork.get("/api/getArticleInfo", { id: id }, data => {
-        console.log(data.data);
-        if (data.data.tags != "") {
+        try {
           data.data.tags = JSON.parse(data.data.tags);
-        } else {
+        } catch (e) {
           data.data.tags = [];
         }
         this.formValidate = data.data;
