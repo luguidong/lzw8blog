@@ -41,6 +41,7 @@ var checkLogin = async (ctx, next) => {
 
 }
 
+
 module.exports = {
     'GET /api/login': login,
     'GET /api/checkLogin': checkLogin

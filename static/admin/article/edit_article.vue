@@ -89,9 +89,12 @@ export default {
             params[item] = this.formValidate[item];
           }
           params.tags = JSON.stringify(params.tags);
-          this.$netWork.post("/api/createArticle", params, data => {
+          var url = this.$route.params.id
+            ? "/api/editArticle"
+            : "/api/createArticle";
+          this.$netWork.post(url, params, data => {
             if (data.code == 0) {
-              this.$Message.success("创建创建成功");
+              this.$Message.success("创建成功");
               setTimeout(() => {
                 this.$router.push("/admin/article_list");
               }, 1500);
