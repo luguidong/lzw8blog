@@ -5,9 +5,11 @@
             新建文章
         </Button>
         <Table stripe :columns="columns1" :data="articleList"></Table>
+        <pages @change='gotoPage'></pages>
     </div>
 </template>
 <script>
+import pages from "../../global/page.vue";
 export default {
   data() {
     return {
@@ -52,6 +54,9 @@ export default {
   },
   created() {
     this.getArticleList();
+    this.$bus.on("change", index => {
+      console.log(index);
+    });
   },
   methods: {
     createArticle() {
@@ -73,7 +78,13 @@ export default {
     },
     editArticle(id) {
       this.$router.push("/admin/edit_article/" + id);
+    },
+    gotoPage(index) {
+      console.log(index);
     }
+  },
+  components: {
+    pages
   }
 };
 </script>
