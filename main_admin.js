@@ -52,7 +52,7 @@ router.afterEach((to, from, next) => {
 
 new Vue({
     el: '#app',
-    router: router,
+    router,
     render: h => {
         return h(App)
     }

@@ -5,7 +5,7 @@ let now = Date.now();
 const hash = crypto.createHash('md5');
 hash.update('152867');
 var pwd = hash.digest('hex');
-(async () => {
+(async() => {
     var pets = await User.findAll({
         where: {
             name: 'melon'
@@ -14,7 +14,7 @@ var pwd = hash.digest('hex');
     console.log('查询到的user:' + JSON.stringify(pets[0]));
     if (pets.length > 0) {
         //已存在管理员，初始化密码
-        (async () => {
+        await (async() => {
             var p = await pets[0];
             p.gender = true;
             p.updatedAt = Date.now();

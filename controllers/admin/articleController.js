@@ -1,15 +1,14 @@
 //文章新建、编辑与列表
 let Article = require('../../models/Article');
-var articleList = async (ctx, next) => {
-    await Article.findAll({
-    }).then((articles) => {
+var articleList = async(ctx, next) => {
+    await Article.findAll({}).then((articles) => {
         ctx.rest({ code: 0, data: articles, msg: '' });
     }).catch((err) => {
         console.log(err);
     })
 }
 
-var getArticle = async (ctx, next) => {
+var getArticle = async(ctx, next) => {
     var id = ctx.query.id;
     console.log(id);
     await Article.findAll({
@@ -22,16 +21,16 @@ var getArticle = async (ctx, next) => {
         console.log(err);
     });
 }
-var editArticle = async (ctx, next) => {
+var editArticle = async(ctx, next) => {
     var { id, title, intro, tags, desc } = ctx.request.body;
     var tctx = ctx;
-    await Article.findAll({
+    var article = await Article.findAll({
         where: {
             id: id
         }
-    }).then(article => {
+    }).then(async(article) => {
         if (article.length > 0) {
-            await(async () => {
+            await (async() => {
                 article = article[0];
                 article.title = title;
                 article.intro = intro;
@@ -55,7 +54,7 @@ var editArticle = async (ctx, next) => {
     });
 
 }
-var createArticle = async (ctx, next) => {
+var createArticle = async(ctx, next) => {
     var col = ctx.request.body;
     var { title, intro, tags, desc } = col;
     var params = {
@@ -65,7 +64,7 @@ var createArticle = async (ctx, next) => {
         desc: desc || ''
     };
     var tctx = ctx;
-    await (async (ctx, next) => {
+    await (async(ctx, next) => {
         await Article.create(params).then(function () {
             console.log('创建文章成功');
             tctx.rest({ code: 0, data: {}, msg: '创建文章成功' });
