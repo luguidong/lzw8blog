@@ -5,7 +5,7 @@
             新建文章
         </Button>
         <Table stripe :columns="columns1" :data="articleList"></Table>
-        <Page style="text-align:center;margin-top:20px;" @on-change='gotoPage' :total='articleNum'></Page>
+        <Page :current="currentPage" :total='articleTotal' style="text-align:center;margin-top:20px;" @on-change='gotoPage'></Page>
     </div>
 </template>
 <script>
@@ -49,8 +49,8 @@ export default {
         }
       ],
       articleList: [],
-      articleNum: 100,
-      currentPage: 1
+      currentPage: 1,
+      articleTotal: 0
     };
   },
   created() {
@@ -66,7 +66,8 @@ export default {
         { page: this.currentPage },
         data => {
           if (data.code == 0) {
-            this.articleList = data.data;
+            this.articleList = data.data.rows;
+            this.articleTotal = data.data.count;
             this.articleList.forEach((item, index) => {
               if (item.tags) {
                 this.articleList[index].tags = JSON.parse(item.tags).join(",");
