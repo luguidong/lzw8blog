@@ -5,11 +5,10 @@
             新建文章
         </Button>
         <Table stripe :columns="columns1" :data="articleList"></Table>
-        <pages @change='gotoPage'></pages>
+        <Page style="text-align:center;margin-top:20px;" @on-change='gotoPage' :total='articleNum'></Page>
     </div>
 </template>
 <script>
-import pages from "../../global/page.vue";
 export default {
   data() {
     return {
@@ -49,42 +48,43 @@ export default {
           }
         }
       ],
-      articleList: []
+      articleList: [],
+      articleNum: 100,
+      currentPage: 1
     };
   },
   created() {
     this.getArticleList();
-    this.$bus.on("change", index => {
-      console.log(index);
-    });
   },
   methods: {
     createArticle() {
       this.$router.push("/admin/create_article");
     },
     getArticleList() {
-      this.$netWork.get("/api/articleList", {}, data => {
-        if (data.code == 0) {
-          this.articleList = data.data;
-          this.articleList.forEach((item, index) => {
-            if (item.tags) {
-              this.articleList[index].tags = JSON.parse(item.tags).join(",");
-            }
-          });
-        } else {
-          this.$Message.err("网络错误，请刷新后重试");
+      this.$netWork.get(
+        "/api/articleList",
+        { page: this.currentPage },
+        data => {
+          if (data.code == 0) {
+            this.articleList = data.data;
+            this.articleList.forEach((item, index) => {
+              if (item.tags) {
+                this.articleList[index].tags = JSON.parse(item.tags).join(",");
+              }
+            });
+          } else {
+            this.$Message.err("网络错误，请刷新后重试");
+          }
         }
-      });
+      );
     },
     editArticle(id) {
       this.$router.push("/admin/edit_article/" + id);
     },
     gotoPage(index) {
-      console.log(index);
+      this.currentPage = index;
+      this.getArticleList();
     }
-  },
-  components: {
-    pages
   }
 };
 </script>

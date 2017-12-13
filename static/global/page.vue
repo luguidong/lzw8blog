@@ -13,7 +13,7 @@ export default {
   methods: {
     test(index) {
       console.log(11);
-      this.$bus.emit("change", index);
+      this.$emit("change", index);
     }
   }
 };

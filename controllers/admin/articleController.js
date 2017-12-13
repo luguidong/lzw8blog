@@ -1,7 +1,11 @@
 //文章新建、编辑与列表
 let Article = require('../../models/Article');
 var articleList = async(ctx, next) => {
-    await Article.findAll({}).then((articles) => {
+    var page = ctx.query.page || 1;
+    await Article.findAll({
+        limit: 10,
+        offset: 10 * (page - 1)
+    }).then((articles) => {
         ctx.rest({ code: 0, data: articles, msg: '' });
     }).catch((err) => {
         console.log(err);
