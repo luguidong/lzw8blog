@@ -24,11 +24,14 @@
             <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
         </FormItem>
     </Form>
+    <UE></UE>
     </div>
 </template>
 <script>
+import UE from '../../global/editor.vue';
 export default {
-  data() {
+  
+  data() {  
     return {
       formValidate: {
         title: "",
@@ -124,6 +127,9 @@ export default {
         this.formValidate = data.data;
       });
     }
+  },
+  components:{
+    UE
   }
 };
 </script>
