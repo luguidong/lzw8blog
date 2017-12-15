@@ -15,24 +15,18 @@
 
     ajax = UE.ajax;
 
-    $G = function ( id )  //等于$("#")
-    {
+    $G = function ( id ) {
         return document.getElementById( id )
     };
     //focus元素
-    $focus = function ( node )
-    {
-        setTimeout( function ()
-        {
-            if ( browser.ie )
-            {
+    $focus = function ( node ) {
+        setTimeout( function () {
+            if ( browser.ie ) {
                 var r = node.createTextRange();
                 r.collapse( false );
                 r.select();
-            }
-            else
-            {
-                node.focus();//触发focus()事件
+            } else {
+                node.focus()
             }
         }, 0 )
     };

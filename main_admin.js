@@ -12,10 +12,10 @@ import iView from 'iview';
 import routers from './static/admin/router';
 
 //ueditor
-import './static/js/ueditor/ueditor.config.copy.js'
-import './static/js/ueditor/ueditor.all.min.js'
-import './static/js/ueditor/lang/zh-cn/zh-cn.js'
-import './static/js/ueditor/ueditor.parse.min.js'
+import './static/js/ueditor/ueditor.config.copy.js';
+import './static/js/ueditor/ueditor.all.min.js';
+import './static/js/ueditor/lang/zh-cn/zh-cn.js';
+import './static/js/ueditor/ueditor.parse.min.js';
 
 Vue.use(VueRouter);
 Vue.use(Bus);
