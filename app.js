@@ -33,7 +33,9 @@ app.use(session({
 //ueditor集成
 var ueditor = require("./libs/ueditor.config.js");
 app.use(async(ctx, next) => {
-    if (ctx.request.path.startsWith('/ueditor/ue')) {
+    console.log(ctx.request.path);
+    if (ctx.request.path.startsWith('/static/js/ueditor/ue')) {
+        console.log('进入编辑处理方法');
         ueditor(path.join(__dirname, 'static'), function (req, res, next) {
             //客户端上传文件设置
             var imgDir = '/img/ueditor/'
