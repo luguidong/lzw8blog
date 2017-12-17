@@ -28,10 +28,9 @@
     </div>
 </template>
 <script>
-import UE from '../../global/editor.vue';
+import UE from "../../global/editor.vue";
 export default {
-  
-  data() {  
+  data() {
     return {
       formValidate: {
         title: "",
@@ -128,7 +127,7 @@ export default {
       });
     }
   },
-  components:{
+  components: {
     UE
   }
 };

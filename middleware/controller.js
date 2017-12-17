@@ -90,9 +90,13 @@ function forEeachWithEnd(dirname, ends) {
     });
 }
 
+
 module.exports = function (dir) {
     let controllers_dir = dir || 'controllers',
         router = require('koa-router')();
     addControllers(router, controllers_dir);
+    
+    var ueditor = require('koa-ueditor')('static');//配置ueditor
+    router.all('/static/js/ueditor/ue',ueditor);
     return router.routes();
 }
