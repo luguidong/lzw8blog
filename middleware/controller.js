@@ -40,7 +40,7 @@ function getFilesWinthEnd(path, ends) {
             fs.readdirSync(path).forEach(function (file) {
                 ScanDir.call(that, path + '/' + file, ends);
             })
-        } catch (e) {}
+        } catch (e) { }
     };
     return controllerFiles;
 }
@@ -89,12 +89,9 @@ function forEeachWithEnd(dirname, ends) {
         }
     });
 }
-
-
 module.exports = function (dir) {
     let controllers_dir = dir || 'controllers',
         router = require('koa-router')();
     addControllers(router, controllers_dir);
-
     return router.routes();
 }

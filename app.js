@@ -24,21 +24,14 @@ const Sequelize = require('sequelize');
 const app = new Koa();
 const rest = require('./middleware/rest');
 
-//ueditor集成
-var staticsPath = 'public'; //静态资源路径
-var serve = require('koa-static');
-app.use(serve(staticsPath)); //设置静态资源路径
-
-var ueditor = require('koa-ueditor')(staticsPath); //配置ueditor
-router.all('/public/ueditor/ue', ueditor);
-app.use(router.routes());
+//ueditor
+const ueditor = require('./middleware/ueditor');
+app.use(ueditor('public'));
 //session持久化
 const Store = require("./libs/Store.js");
 app.use(session({
     store: new Store()
 }));
-
-
 
 app.use(cors({
     origin: function (ctx) {
@@ -59,6 +52,7 @@ if (!isProduction) {
     let staticFiles = require('./middleware/static-files');
     app.use(staticFiles('/static', __dirname + '/static'));
 }
+
 app.use(bodyParser());
 app.use(templating('views', {
     noCache: !isProduction,
