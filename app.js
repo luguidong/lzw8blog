@@ -5,7 +5,7 @@ const Koa = require('koa');
 //post提交的表单数据处理
 const bodyParser = require('koa-bodyparser');
 //koa-router返回的是函数
-const router = require('koa-router');
+const router = require('koa-router')();
 //创建一个Koa对象表示web app本身
 const controller = require('./middleware/controller');
 const templating = require('./middleware/templating');
@@ -24,16 +24,21 @@ const Sequelize = require('sequelize');
 const app = new Koa();
 const rest = require('./middleware/rest');
 
+//ueditor集成
+var staticsPath = 'public'; //静态资源路径
+var serve = require('koa-static');
+app.use(serve(staticsPath)); //设置静态资源路径
+
+var ueditor = require('koa-ueditor')(staticsPath); //配置ueditor
+router.all('/public/ueditor/ue', ueditor);
+app.use(router.routes());
 //session持久化
 const Store = require("./libs/Store.js");
 app.use(session({
     store: new Store()
 }));
 
-//ueditor集成
-var staticsPath = 'static';//静态资源路径
-var serve = require('koa-static');
-app.use(serve(staticsPath));//设置静态资源路径
+
 
 app.use(cors({
     origin: function (ctx) {
