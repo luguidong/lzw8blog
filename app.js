@@ -26,7 +26,7 @@ const rest = require('./middleware/rest');
 
 //ueditor
 const ueditor = require('./middleware/ueditor');
-app.use(ueditor('public'));
+app.use(ueditor(__dirname + '/public'));
 //session持久化
 const Store = require("./libs/Store.js");
 app.use(session({
