@@ -4,7 +4,7 @@ const fs = require('mz/fs');
 
 
 function staticFiles(url, dir) {
-    return async(ctx, next) => {
+    return async (ctx, next) => {
         let rpath = ctx.request.path;
         //判断是否以指定的url开头,main为开发使用的js/css
         if (rpath.startsWith('/public')) {
