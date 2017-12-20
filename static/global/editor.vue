@@ -13,6 +13,7 @@ export default {
   },
   props: {
     defaultMsg: {
+      default: "",
       type: String
     },
     config: {

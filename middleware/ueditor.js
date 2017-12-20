@@ -11,6 +11,7 @@ const fs = require('mz/fs');
 function ueditor(url, dir) {
     return async (ctx, next) => {
         let rpath = ctx.request.path;
+        console.log('rpath:' + rpath);
         if (rpath.startsWith('/public')) {
             if (ctx.request.query.action === 'config') {
                 //ctx.response.type = 'text/plain'
@@ -18,7 +19,6 @@ function ueditor(url, dir) {
             } else {
                 let fp = path.join(dir, rpath.substring(url.length));
                 //判断文件是否存在
-                console.log('静态资源' + fp);
                 if (await fs.exists(fp)) {
                     //查找文件的mime:
                     //ueditor的config必须使用304跳转的形式返回，否则会配置错误

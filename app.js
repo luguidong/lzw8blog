@@ -33,10 +33,10 @@ app.use(session({
 
 app.use(cors({
     origin: function (ctx) {
-        if (ctx.url === '/test') {
-            return "*"; // 允许来自所有域名请求
-        }
-        return 'http://localhost:8080'; // 这样就能只允许 http://localhost:8080 这个域名的请求了
+        //if (ctx.url === '/test') {
+        return "http://localhost:8080"; // 允许来自所有域名请求
+        //}
+        //return 'http://localhost:8080'; // 这样就能只允许 http://localhost:8080 这个域名的请求了
     },
     exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
     maxAge: 5,
@@ -45,15 +45,14 @@ app.use(cors({
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }));
 
-
+//ueditor
+const ueditor = require('./middleware/ueditor');
+app.use(ueditor('/public', __dirname + '/public'));
 if (!isProduction) {
     let staticFiles = require('./middleware/static-files');
     app.use(staticFiles('/static', __dirname + '/static'));
     console.log('使用了文件');
 }
-//ueditor
-const ueditor = require('./middleware/ueditor');
-app.use(ueditor('/public', __dirname + '/public'));
 
 app.use(bodyParser());
 app.use(templating('views', {

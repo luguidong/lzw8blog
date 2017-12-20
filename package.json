@@ -19,6 +19,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "axios": "^0.17.1",
+    "babel-plugin-transform-remove-strict-mode": "^0.0.2",
     "ioredis": "^3.2.2",
     "iview": "^2.7.3",
     "koa": "2.0.0",

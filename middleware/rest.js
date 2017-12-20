@@ -7,13 +7,14 @@ module.exports = {
     },
     restify: (pathPrefix) => {
         pathPrefix = pathPrefix || '/api/';
-        
+
         return async (ctx, next) => {
             //如果是public下的，则为编辑器资源
-            if(ctx.request.path.startsWith('/public')){
+            console.log(ctx.request.path);
+            if (ctx.request.path.startsWith('/public')) {
                 console.log('通过rest');
                 await next();
-            }else if (ctx.request.path.startsWith(pathPrefix)) {
+            } else if (ctx.request.path.startsWith(pathPrefix)) {
                 console.log(`Process API ${ctx.request.method} ${ctx.request.url}...`);
                 ctx.rest = (data) => {
                     ctx.response.type = 'application/json';
