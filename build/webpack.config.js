@@ -8,8 +8,8 @@ const config = {
         main: './main',
     },
     output: {
-        path: path.join(__dirname, './static/js/dist'),
-        publicPath: '/static/js/dist/',
+        path: path.join(__dirname, './public/js/dist'),
+        publicPath: '/public/js/dist/',
         filename: 'main.js'
     },
     module: {

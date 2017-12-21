@@ -45,15 +45,14 @@ app.use(cors({
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }));
 
-
 if (!isProduction) {
     let staticFiles = require('./middleware/static-files');
     app.use(staticFiles('/static', __dirname + '/static'));
-    console.log('使用了文件');
 }
 //ueditor
 const ueditor = require('./middleware/ueditor');
 app.use(ueditor('/public', __dirname + '/public'));
+
 
 app.use(bodyParser());
 app.use(templating('views', {

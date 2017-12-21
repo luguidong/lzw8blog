@@ -22,14 +22,15 @@ function createEnv(path, opts) {
     return env;
 }
 
-function templating(path,opts){
+function templating(path, opts) {
     //创建nunjucks 的 env对象;
-    var env = createEnv(path,opts);
-    return async(ctx,next) => {
+    var env = createEnv(path, opts);
+    return async(ctx, next) => {
         //给ctx绑定render函数
-        ctx.render = function(view,model){
+        ctx.render = function (view, model) {
             //把render后的内容赋值给response.body
-            ctx.response.body = env.render(view,Object.assign({},ctx.state||{},model || {}));
+
+            ctx.response.body = env.render(view, Object.assign({}, ctx.state || {}, model || {}));
             //设置content-type
             ctx.response.type = 'text/html';
         };

@@ -11,7 +11,7 @@ const fs = require('mz/fs');
 function ueditor(url, dir) {
     return async(ctx, next) => {
         let rpath = ctx.request.path;
-        if (rpath.startsWith('/public')) {
+        if (rpath.startsWith('/public/ueditor')) {
             if (ctx.request.query.action === 'config') {
                 //ctx.response.type = 'text/plain'
                 ctx.redirect('/public/ueditor/nodejs/config.json');

@@ -6,10 +6,10 @@ const webpackBaseConfig = require('./webpack.views.dev');
 const path = require('path');
 webpackBaseConfig.plugins = [];
 
-module.exports = merge(webpackBaseConfig,{
-    output:{ 
-        path: path.join(__dirname,'../static/js/dist'),
-        publicPath:'/static/js/dist/',
+module.exports = merge(webpackBaseConfig, {
+    output: {
+        path: path.join(__dirname, '../public/js/dist'),
+        publicPath: '/public/js/dist/',
         filename: '[name].[hash].js'
     },
     plugins: [
@@ -28,9 +28,9 @@ module.exports = merge(webpackBaseConfig,{
             }
         }),
         new HtmlWebpackPlugin({
-            filename: '../../../views/views.html',
-            template: './views/index.ejs',
-            inject:false
+            filename: './public/views.html',
+            template: './public/index.ejs',
+            inject: false
         })
     ]
 });

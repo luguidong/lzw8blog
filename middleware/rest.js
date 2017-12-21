@@ -7,13 +7,10 @@ module.exports = {
     },
     restify: (pathPrefix) => {
         pathPrefix = pathPrefix || '/api/';
-        
-        return async (ctx, next) => {
+
+        return async(ctx, next) => {
             //如果是public下的，则为编辑器资源
-            if(ctx.request.path.startsWith('/public')){
-                console.log('通过rest');
-                await next();
-            }else if (ctx.request.path.startsWith(pathPrefix)) {
+            if (ctx.request.path.startsWith(pathPrefix)) {
                 console.log(`Process API ${ctx.request.method} ${ctx.request.url}...`);
                 ctx.rest = (data) => {
                     ctx.response.type = 'application/json';
@@ -38,16 +35,16 @@ module.exports = {
                 console.log(ctx.request.path);
                 if (ctx.request.path.startsWith('/admin')) {
                     if (ctx.session.appid) {
-                        ctx.render('../views/admin.html', {
+                        ctx.render('../public/admin.html', {
 
                         })
                     } else {
-                        ctx.render('../views/views.html', {
+                        ctx.render('../public/views.html', {
 
                         })
                     }
                 } else {
-                    ctx.render('../views/views.html', {
+                    ctx.render('../public/admin.html', {
 
                     })
                 }
