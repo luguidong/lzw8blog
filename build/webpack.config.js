@@ -3,6 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
     watch: true,
+
     entry: {
         main: './main',
     },
