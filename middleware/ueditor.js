@@ -21,12 +21,7 @@ function ueditor(url, dir) {
                 console.log('静态资源' + fp);
                 if (await fs.exists(fp)) {
                     //查找文件的mime:
-                    //ueditor的config必须使用304跳转的形式返回，否则会配置错误
-                    if (fp.endsWith('config.json')) {
-                        ctx.response.status = 304;
-                    } else {
-                        ctx.response.type = mime.lookup(rpath);
-                    }
+                    ctx.response.type = mime.lookup(rpath);
                     ctx.response.body = await fs.readFile(fp);
                 } else {
                     ctx.response.status = 404;
