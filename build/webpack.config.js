@@ -28,7 +28,12 @@ const config = {
         {
             test: /\.js$/,
             loader: 'babel-loader',
-            exclude: /node_modules/
+            exclude: /node_modules/,
+            options: {
+                "presets": [
+                    ['es2015', { modules: false }]
+                ],
+            }
         },
         {
             test: /\.css$/,

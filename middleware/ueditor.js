@@ -9,7 +9,7 @@ const mime = require('mime');
 const fs = require('mz/fs');
 
 function ueditor(url, dir) {
-    return async (ctx, next) => {
+    return async(ctx, next) => {
         let rpath = ctx.request.path;
         if (rpath.startsWith('/public')) {
             if (ctx.request.query.action === 'config') {
@@ -27,7 +27,6 @@ function ueditor(url, dir) {
                     } else {
                         ctx.response.type = mime.lookup(rpath);
                     }
-
                     ctx.response.body = await fs.readFile(fp);
                 } else {
                     ctx.response.status = 404;

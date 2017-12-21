@@ -13,6 +13,7 @@ export default {
   },
   props: {
     defaultMsg: {
+      default: "测试的数据",
       type: String
     },
     config: {
