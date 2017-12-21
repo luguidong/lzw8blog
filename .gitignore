@@ -1,4 +1,5 @@
 node_modules
+public/js/dist
 static/js/dist
 views/admin.html
 views/views.html

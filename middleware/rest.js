@@ -8,7 +8,7 @@ module.exports = {
     restify: (pathPrefix) => {
         pathPrefix = pathPrefix || '/api/';
 
-        return async(ctx, next) => {
+        return async (ctx, next) => {
             //如果是public下的，则为编辑器资源
             if (ctx.request.path.startsWith(pathPrefix)) {
                 console.log(`Process API ${ctx.request.method} ${ctx.request.url}...`);
@@ -44,7 +44,7 @@ module.exports = {
                         })
                     }
                 } else {
-                    ctx.render('../public/admin.html', {
+                    ctx.render('../public/views.html', {
 
                     })
                 }

@@ -35,9 +35,6 @@ router.beforeEach((to, from, next) => {
     //进度条
     iView.LoadingBar.start();
     var url = '/api/checkLogin'
-    if (true) {
-        url = "http://localhost:3000" + url;
-    }
     axios.get(url, {}).then((data) => {
         if (data.data.data.isLogin == 0) {
             console.log('登录成功');

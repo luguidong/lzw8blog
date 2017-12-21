@@ -44,18 +44,16 @@ app.use(cors({
     allowMethods: ['GET', 'POST', 'DELETE'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }));
-
-if (!isProduction) {
-    let staticFiles = require('./middleware/static-files');
-    app.use(staticFiles('/static', __dirname + '/static'));
-}
 //ueditor
 const ueditor = require('./middleware/ueditor');
 app.use(ueditor('/public', __dirname + '/public'));
-
+if (!isProduction) {
+    let staticFiles = require('./middleware/static-files');
+    app.use(staticFiles('/public', __dirname + '/public'));
+}
 
 app.use(bodyParser());
-app.use(templating('views', {
+app.use(templating('public', {
     noCache: !isProduction,
     watch: !isProduction
 }))

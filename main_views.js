@@ -9,7 +9,6 @@ import NetWork from './public/js/libs/net-work'
 import './public/css/style.css';
 import 'iview/dist/styles/iview.css';
 import IView from 'iview';
-import 'clipboard';
 Vue.use(VueRouter);
 Vue.use(Bus);
 Vue.use(NetWork);

@@ -2,7 +2,7 @@
 <div class="nav_con">
   <div class="header_box">
         <Dropdown placement="bottom-end">
-            <img class="header_img" src="/static/images/logo.png" alt="">
+            <img class="header_img" src="/public/images/logo.png" alt="">
             <Dropdown-menu slot="list">
                 <Dropdown-item>退出登录</Dropdown-item>
             </Dropdown-menu>
