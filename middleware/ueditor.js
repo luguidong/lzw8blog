@@ -6,7 +6,7 @@ var img_type = '.jpg .png .gif .ico .bmp .jpeg';
 var img_path = '/upload/img';
 var files_path = '/upload/file';
 const mime = require('mime');
-const fs = require('mz/fs'); 
+const fs = require('mz/fs');
 
 function ueditor(url, dir) {
     return async(ctx, next) => {
@@ -16,8 +16,8 @@ function ueditor(url, dir) {
             if (action === 'config') {
                 //ctx.response.type = 'text/plain'
                 ctx.redirect('/public/ueditor/nodejs/config.json');
-            } 
-            else if(action === 'uploadimage' || action === 'uploadfile'){
+            }
+            else if (action === 'uploadimage' || action === 'uploadfile') {
                 console.log('shangchuanzhong');
                 var parts = parse(ctx.request);
                 var part;
@@ -25,7 +25,8 @@ function ueditor(url, dir) {
                 var tmp_name;
                 var file_path;
                 var filename;
-                while (part = parts) {
+                var i = 0;
+                while (part = parts[i++]) {
                     console.log('shangchuanzhong');
                     if (part.length) {
                         // fields are returned as arrays
@@ -36,14 +37,14 @@ function ueditor(url, dir) {
                     } else {
                         // files are returned as readable streams
                         // let's just save them to disk
-                        if(action === 'uploadimage' && img_type.indexOf(path.extname(part.filename)) >= 0 ){
-                            filename = 'pic_'+(new Date()).getTime()+'_'+part.filename;
+                        if (action === 'uploadimage' && img_type.indexOf(path.extname(part.filename)) >= 0) {
+                            filename = 'pic_' + (new Date()).getTime() + '_' + part.filename;
                             file_path = path.join(img_path, filename);
-                        }else if (action === 'uploadfile'){
-                            filename = 'file_'+(new Date()).getTime()+'_'+part.filename;
+                        } else if (action === 'uploadfile') {
+                            filename = 'file_' + (new Date()).getTime() + '_' + part.filename;
                             file_path = path.join(files_path, filename);
                         }
-                        stream = fs.createWriteStream(path.join(static_path,file_path));
+                        stream = fs.createWriteStream(path.join(static_path, file_path));
                         part.pipe(stream);
                         console.log('uploading %s -> %s', part.filename, stream.path);
                         tmp_name = part.filename;
