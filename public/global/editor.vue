@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div id="editor" type="text/plain"></div>
+    <div class="editTitle" :style="config.style">{{config.title}}</div>
+    <div :style='config.ueditStyle' id="editor" type="text/plain"></div>
   </div>
 </template>
 <script>
@@ -17,7 +18,9 @@ export default {
       type: String
     },
     config: {
-      type: Object
+      title: {
+        default: ""
+      }
     }
   },
   mounted() {
@@ -39,3 +42,9 @@ export default {
   }
 };
 </script>
+<style lang='sass'>
+  .editTitle{
+    text-align:right;
+    padding-right:10px;
+  }
+</style>

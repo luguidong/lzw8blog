@@ -20,11 +20,21 @@ const userMiddle = require('./middleware/userMiddle');
 const model = require('./middleware/model');
 //mysql操作
 const Sequelize = require('sequelize');
-
-const app = new Koa();
+//日志
+const logger = require('koa-logger');
 const rest = require('./middleware/rest');
+//文件上传
+const koaBody = require('koa-body');
+const serve = require('koa-static');
+var route = require('koa-router')();
+const app = new Koa();
+app.use(logger());
+app.use(koaBody({ multipart: true }));
+//app.use(bodyParser());
 
-
+//app.use(serve(path.join(__dirname, '/public')));
+const ueditor = require('./middleware/ueditor');
+app.use(ueditor('/public', __dirname + '/public'));
 //session持久化
 const Store = require("./libs/Store.js");
 app.use(session({
@@ -44,15 +54,13 @@ app.use(cors({
     allowMethods: ['GET', 'POST', 'DELETE'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }));
-//ueditor
-const ueditor = require('./middleware/ueditor');
-app.use(ueditor('/public', __dirname + '/public'));
+
 if (!isProduction) {
     let staticFiles = require('./middleware/static-files');
     app.use(staticFiles('/public', __dirname + '/public'));
 }
 
-app.use(bodyParser());
+
 app.use(templating('public', {
     noCache: !isProduction,
     watch: !isProduction

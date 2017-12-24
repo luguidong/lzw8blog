@@ -16,15 +16,16 @@
                 <Checkbox label="vue"></Checkbox>
             </CheckboxGroup>
         </FormItem>
-        <FormItem label="Desc" prop="desc">
-            <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
-        </FormItem>
+         <div>
+          <UE :config = 'ueditConfig'></UE>
+        </div>
         <FormItem>
             <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
             <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
         </FormItem>
     </Form>
-    <UE></UE>
+
+   
     </div>
 </template>
 <script>
@@ -74,6 +75,16 @@ export default {
             trigger: "blur"
           }
         ]
+      },
+      ueditConfig: {
+        title: "详情",
+        style: {
+          width: "80px",
+          float: "left"
+        },
+        ueditStyle: {
+          marginLeft: "80px"
+        }
       }
     };
   },
