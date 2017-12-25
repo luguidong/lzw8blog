@@ -17,15 +17,14 @@
             </CheckboxGroup>
         </FormItem>
          <div>
-          <UE :config = 'ueditConfig'></UE>
+          <UE :config = 'ueditConfig'  ref="ueditor"></UE>
         </div>
         <FormItem>
             <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
             <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
+            <button @click='getUeditorContent'>获得ueditor</button>
         </FormItem>
     </Form>
-
-   
     </div>
 </template>
 <script>
@@ -136,6 +135,10 @@ export default {
         }
         this.formValidate = data.data;
       });
+    },
+    getUeditorContent() {
+      var desc = this.$refs.ueditor.getUEContent();
+      console.log(desc);
     }
   },
   components: {
