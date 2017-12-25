@@ -1,5 +1,22 @@
 {
-    "presets": ["es2015"],
-    "plugins": ["transform-runtime", "transform-remove-strict-mode"],
+    "presets": [
+        "es2015",
+        {
+            "modules": false
+        }
+    ],
+    "plugins": [
+        "transform-runtime",
+        "transform-remove-strict-mode",
+        [
+            "component",
+            [
+                {
+                    "libraryName": "element-ui",
+                    "styleLibraryName": "theme-chalk"
+                }
+            ]
+        ]
+    ],
     "comments": false
 }

@@ -17,13 +17,14 @@
             </CheckboxGroup>
         </FormItem>
          <div>
-          <UE :config = 'ueditConfig'  ref="ueditor"></UE>
+          <UE :defaultMsg='ueditConfig.content' :config = 'ueditConfig'  ref="ueditor"></UE>
         </div>
         <FormItem>
             <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
             <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
-            <button @click='getUeditorContent'>获得ueditor</button>
+            
         </FormItem>
+        
     </Form>
     </div>
 </template>
@@ -60,19 +61,6 @@ export default {
             message: "Choose two hobbies at best",
             trigger: "change"
           }
-        ],
-        desc: [
-          {
-            required: true,
-            message: "Please enter a personal introduction",
-            trigger: "blur"
-          },
-          {
-            type: "string",
-            min: 5,
-            message: "Introduce no less than 5 words",
-            trigger: "blur"
-          }
         ]
       },
       ueditConfig: {
@@ -81,6 +69,7 @@ export default {
           width: "80px",
           float: "left"
         },
+        content: "",
         ueditStyle: {
           marginLeft: "80px"
         }
@@ -101,6 +90,7 @@ export default {
             params[item] = this.formValidate[item];
           }
           params.tags = JSON.stringify(params.tags);
+          params.desc = this.getUeditorContent();
           var url = "";
           if (this.$route.params.id) {
             url = "/api/editArticle";
@@ -134,11 +124,11 @@ export default {
           data.data.tags = [];
         }
         this.formValidate = data.data;
+        this.ueditConfig.content = data.data.desc;
       });
     },
     getUeditorContent() {
-      var desc = this.$refs.ueditor.getUEContent();
-      console.log(desc);
+      return this.$refs.ueditor.getUEContent();
     }
   },
   components: {

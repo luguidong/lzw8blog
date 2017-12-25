@@ -6,28 +6,15 @@ import axios from 'axios';
 //设置axios在请求头上带有cookie
 axios.defaults.withCredentials = true;
 import NetWork from './public/js/libs/net-work'
-import './public/css/style.css';
-import 'iview/dist/styles/iview.css';
-import IView from 'iview';
+import Routers from './public/views/router';
+//按需引入element
+import { Button, Select } from 'element-ui';
+
 Vue.use(VueRouter);
 Vue.use(Bus);
 Vue.use(NetWork);
-Vue.use(IView);
-const Routers = [
-{
-    path: '/login',
-    meta: {
-        title: '登录'
-    },
-    component: (resolve) => require(['./public/views/login/login.vue'], resolve)
-},
-{
-    path: '*',
-    meta: {
-        title: '登录'
-    },
-    component: (resolve) => require(['./public/views/login/login.vue'], resolve)
-}];
+Vue.component(Button.name, Button);
+Vue.component(Select.name, Select);
 
 const RouterConfig = {
     mode: 'history', //hash，通过改变浏览器地址栏且不跳转改变页面
