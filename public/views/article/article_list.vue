@@ -2,7 +2,7 @@
   <div class="container">
     <ul class="article_list">
         <li v-for="item in articleList">
-            <router-link to=''>{{item.title}}</router-link>
+            <router-link :to="{path:'/article',params:{id:item.id}}" >{{item.title}}</router-link>
         </li>
     </ul>
   </div>
@@ -47,6 +47,19 @@ export default {
 
     },
     .article_list{
-        list-style:none;
+        a{
+          color:#909399;
+          display:block;
+          &:hover{
+            color:#409EFF;
+          }
+        }
+        li{
+          display:block;
+          width:100%;
+          line-height:50px;
+          height:50px;
+          border-bottom:1px solid #EBEEF5;
+        }
     }
 </style>

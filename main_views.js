@@ -10,6 +10,8 @@ import Routers from './public/views/router';
 //按需引入element
 import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
+//reset.css
+import './public/css/view_rest.css';
 
 Vue.use(VueRouter);
 Vue.use(Bus);
@@ -23,7 +25,11 @@ const RouterConfig = {
 
 const router = new VueRouter(RouterConfig);
 router.beforeEach((to, from, next) => {
-    window.document.title = to.meta.title;
+    if (to.meta.title) {
+        window.document.title = to.meta.title;
+    } else {
+        window.document.title = 'lzw8';
+    }
     next();
 });
 router.afterEach((to, from, next) => {
