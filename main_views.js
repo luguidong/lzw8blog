@@ -8,13 +8,13 @@ axios.defaults.withCredentials = true;
 import NetWork from './public/js/libs/net-work'
 import Routers from './public/views/router';
 //按需引入element
-import { Button, Select } from 'element-ui';
+import Element from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(VueRouter);
 Vue.use(Bus);
 Vue.use(NetWork);
-Vue.component(Button.name, Button);
-Vue.component(Select.name, Select);
+Vue.use(Element);
 
 const RouterConfig = {
     mode: 'history', //hash，通过改变浏览器地址栏且不跳转改变页面
