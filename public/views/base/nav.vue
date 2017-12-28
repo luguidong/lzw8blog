@@ -31,7 +31,10 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+      console.log(keyPath);
+      if (key == 1) {
+        this.$router.push("/");
+      }
     }
   }
 };

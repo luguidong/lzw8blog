@@ -2,7 +2,7 @@
   <div class="container">
     <ul class="article_list">
         <li v-for="item in articleList">
-            <router-link :to="{path:'/article',params:{id:item.id}}" >{{item.title}}</router-link>
+            <router-link :to="{path:'/article',query:{id:item.id}}" >{{item.title}}</router-link>
         </li>
     </ul>
   </div>
