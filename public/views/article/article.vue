@@ -1,8 +1,7 @@
 <template>
   <div class="com_contain">
       <p>{{title}}</p>
-      <div>
-        {{content}}
+      <div v-html="content">
       </div>
   </div>
 </template>
