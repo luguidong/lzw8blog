@@ -54,12 +54,9 @@ app.use(cors({
     allowMethods: ['GET', 'POST', 'DELETE'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }));
-
-if (!isProduction) {
-    let staticFiles = require('./middleware/static-files');
-    app.use(staticFiles('/public', __dirname + '/public'));
-}
-
+//静态文件
+let staticFiles = require('./middleware/static-files');
+app.use(staticFiles('/public', __dirname + '/public'));
 
 app.use(templating('public', {
     noCache: !isProduction,
