@@ -10,7 +10,7 @@
                     </template>
                     <Menu-item name='article_manage'>文章管理</Menu-item>
                     <Menu-item name='comment_manage'>评论管理</Menu-item>
-                    <Menu-item name='1-3'>举报管理</Menu-item>
+                    <Menu-item name='to_do_list'>To Do List</Menu-item>
                 </Submenu>
                 <Submenu key="2" name='2'>
                     <template slot="title">
@@ -50,10 +50,16 @@ export default {
   methods: {
     handleHref(name) {
       console.log("点击事件" + name);
-      if (name === "article_manage") {
-        this.$router.push("/admin/article");
-      } else if (name === "comment_manage") {
-        this.$router.push("/admin/comment");
+      switch (name) {
+        case "article_manage":
+          this.$router.push("/admin/article");
+          break;
+        case "comment_manage":
+          this.$router.push("/admin/comment");
+          break;
+        case "to_do_list":
+          this.$router.push("/admin/toDoList");
+          break;
       }
     }
   }

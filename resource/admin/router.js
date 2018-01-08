@@ -1,9 +1,7 @@
 const articleList = require('./article/article_list.vue');
 const commentList = require('./comments/comment.vue');
 const editArticle = require('./article/edit_article.vue');
-const child1 = require('./article/test1.vue');
-const child2 = require('./article/test2.vue');
-
+const toDoList = require('./toDo/to_do_list.vue');
 
 const Routers = [
     {
@@ -11,16 +9,7 @@ const Routers = [
         meta: {
             title: '首页'
         },
-        component: articleList,
-        children: [
-            {
-                path: 'test1',
-                component: child1
-            },
-            {
-                path: 'test2',
-                component: child2
-            }]
+        component: articleList
     },
     {
         path: '/admin/comment',
@@ -42,6 +31,13 @@ const Routers = [
             title: '编辑文章'
         },
         component: editArticle
+    },
+    {
+        path: '/admin/toDoList',
+        meta: {
+            title: 'toDo'
+        },
+        component: toDoList
     },
     {
         path: '*',

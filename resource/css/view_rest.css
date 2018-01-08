@@ -2,6 +2,7 @@
 body {
     margin: 0;
     padding: 0;
+    outline: none;
    }
 
    * {
@@ -21,4 +22,7 @@ body {
 
             .com_contain {
                 padding: 20px;
+               }
+               div:focus{
+                   outline: none!important;
                }

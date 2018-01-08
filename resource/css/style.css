@@ -2,6 +2,9 @@
 body{
     background:#d8d8d8;
 }
+html,div{
+    outline: none;
+}
 .common_content{
     padding:30px;
 }
