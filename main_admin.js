@@ -16,6 +16,9 @@ import routers from './public/admin/router';
 import './public/ueditor/ueditor.config.js';
 import './public/ueditor/ueditor.all.min.js';
 import './public/ueditor/lang/zh-cn/zh-cn.js';
+//加载配置文件
+import './public/admin/config.js';
+
 // import './public/js/ueditor/ueditor.parse.min.js';
 Vue.use(VueRouter);
 Vue.use(Bus);
