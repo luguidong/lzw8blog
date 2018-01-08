@@ -1,5 +1,5 @@
 const defaultConfig = './config-default.js';
-const prodConfig = './config-override.js';
+const prodConfig = './config-prod.js';
 const testConfig = './config-test.js';
 
 const fs = require('fs');
