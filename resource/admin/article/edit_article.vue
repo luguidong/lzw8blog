@@ -16,13 +16,12 @@
                 <Checkbox label="vue"></Checkbox>
             </CheckboxGroup>
         </FormItem>
-         <div>
+         <div class="edit_box">
           <UE :defaultMsg='ueditConfig.content' :config = 'ueditConfig'  ref="ueditor"></UE>
         </div>
         <FormItem>
             <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
             <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
-            
         </FormItem>
         
     </Form>
@@ -139,5 +138,8 @@ export default {
 <style lang="sass">
 .middle_input{
     width:300px;
+}
+.edit_box{
+  margin-bottom:20px;
 }
 </style>

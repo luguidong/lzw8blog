@@ -29,7 +29,7 @@ module.exports = merge(webpackBaseConfig, {
             }
         }),
         new HtmlWebpackPlugin({
-            filename: '../../../public/admin.html',
+            filename: path.join(__dirname, '../public/admin.html'),
             template: './public/index.ejs',
             inject: false
         }),
