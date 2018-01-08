@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Bus from './public/js/libs/vue-bus';
-import App from './public/admin/app.vue';
+import Bus from './resource/js/libs/vue-bus';
+import App from './resource/admin/app.vue';
 import axios from 'axios';
 //设置axios在请求头上带有cookie
 axios.defaults.withCredentials = true;
-import NetWork from './public/js/libs/net-work'
-import './public/css/style.css';
+import NetWork from './resource/js/libs/net-work'
+import './resource/css/style.css';
 import 'iview/dist/styles/iview.css';
 import iView from 'iview';
-import routers from './public/admin/router';
+import routers from './resource/admin/router';
 
 //ueditor 
 
@@ -17,7 +17,7 @@ import './public/ueditor/ueditor.config.js';
 import './public/ueditor/ueditor.all.min.js';
 import './public/ueditor/lang/zh-cn/zh-cn.js';
 //加载配置文件
-import './public/admin/config.js';
+import './resource/admin/config.js';
 
 // import './public/js/ueditor/ueditor.parse.min.js';
 Vue.use(VueRouter);

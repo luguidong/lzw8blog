@@ -4,12 +4,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.admin.dev');
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 webpackBaseConfig.plugins = [];
 
 module.exports = merge(webpackBaseConfig, {
     output: {
-        path: path.join(__dirname, '../public/js/dist'),
-        publicPath: '/public/js/dist/',
+        path: path.join(__dirname, '../public/adminDist'),
+        publicPath: '/public/adminDist',
         filename: '[name].[hash].js'
     },
     plugins: [
@@ -31,6 +32,7 @@ module.exports = merge(webpackBaseConfig, {
             filename: '../../../public/admin.html',
             template: './public/index.ejs',
             inject: false
-        })
+        }),
+        new CleanWebpackPlugin(['adminDist'], { root: path.join(__dirname, '../public/') })
     ]
 });

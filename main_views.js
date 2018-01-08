@@ -1,17 +1,17 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Bus from './public/js/libs/vue-bus';
-import App from './public/views/app.vue';
+import Bus from './resource/js/libs/vue-bus';
+import App from './resource/views/app.vue';
 import axios from 'axios';
 //设置axios在请求头上带有cookie
 axios.defaults.withCredentials = true;
-import NetWork from './public/js/libs/net-work'
-import Routers from './public/views/router';
+import NetWork from './resource/js/libs/net-work'
+import Routers from './resource/views/router';
 //按需引入element
 import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 //reset.css
-import './public/css/view_rest.css';
+import './resource/css/view_rest.css';
 
 Vue.use(VueRouter);
 Vue.use(Bus);

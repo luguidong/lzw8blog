@@ -4,12 +4,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.views.dev');
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 webpackBaseConfig.plugins = [];
 
 module.exports = merge(webpackBaseConfig, {
     output: {
-        path: path.join(__dirname, '../public/js/dist'),
-        publicPath: '/public/js/dist/',
+        path: path.join(__dirname, '../public/viewsDist'),
+        publicPath: '/public/viewsDist/',
         filename: '[name].[hash].js'
     },
     plugins: [
@@ -28,9 +29,10 @@ module.exports = merge(webpackBaseConfig, {
             }
         }),
         new HtmlWebpackPlugin({
-            filename: '../../../public/views.html',
+            filename: path.join(__dirname, '../public/views.html'),
             template: './public/index.ejs',
             inject: false
-        })
+        }),
+        new CleanWebpackPlugin(['viewsDist'], { root: path.join(__dirname, '../public/') })
     ]
 });
