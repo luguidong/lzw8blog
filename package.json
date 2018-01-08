@@ -10,7 +10,7 @@
         "build": "webpack --progress --hide-modules --config build/webpack.views.prod.js",
         "build_admin": "webpack --progress --hide-modules --config build/webpack.admin.prod.js",
         "vue": "webpack --progress --hide-modules --config build/webpack.copy.js",
-        "lzw": "node app.js cross-env NODE_ENV=production"
+        "lzw": "node app.js"
     },
     "keywords": [
         "koa",
