@@ -55,7 +55,6 @@ app.use(cors({
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }));
 //静态文件
-let staticFiles = require('./middleware/static-files');
 app.use(staticFiles('/public', __dirname + '/public'));
 
 app.use(templating('public', {
