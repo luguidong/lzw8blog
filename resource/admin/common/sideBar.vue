@@ -10,7 +10,7 @@
                     </template>
                     <Menu-item name='article_manage'>文章管理</Menu-item>
                     <Menu-item name='comment_manage'>评论管理</Menu-item>
-                    <Menu-item name='to_do_list'>To Do List</Menu-item>
+                    <Menu-item name='todo_list'>To Do List</Menu-item>
                 </Submenu>
                 <Submenu key="2" name='2'>
                     <template slot="title">
@@ -57,8 +57,8 @@ export default {
         case "comment_manage":
           this.$router.push("/admin/comment");
           break;
-        case "to_do_list":
-          this.$router.push("/admin/toDoList");
+        case "todo_list":
+          this.$router.push("/admin/todo_list");
           break;
       }
     }
