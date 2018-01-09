@@ -4,8 +4,10 @@
         <FormItem label="标题" prop="title" >
             <Input v-model="formValidate.title" placeholder="Enter your name"></Input>
         </FormItem>
-        <FormItem label="简介" prop="intro">
-            <Input v-model="formValidate.intro" placeholder="Enter your e-mail"></Input>
+        <FormItem label="类型">
+            <RadioGroup v-model="formValidate.type">
+                <Radio v-for="(item,index) in todoTypeList" :key="index" :value="item.value" :label="item.label"></Radio>
+            </RadioGroup>
         </FormItem>
          <div class="edit_box">
           <UE :defaultMsg='ueditConfig.content' :config = 'ueditConfig'  ref="ueditor"></UE>
@@ -27,7 +29,8 @@ export default {
         title: "",
         stage: "",
         relat_href: "",
-        desc: ""
+        desc: "",
+        type: "学习"
       },
       ruleValidate: {
         title: [
@@ -57,7 +60,18 @@ export default {
         ueditStyle: {
           marginLeft: "80px"
         }
-      }
+      },
+      todoTypeValue: 0,
+      todoTypeList: [
+        {
+          value: 0,
+          label: "学习"
+        },
+        {
+          value: 1,
+          label: "技术积累"
+        }
+      ]
     };
   },
   created() {

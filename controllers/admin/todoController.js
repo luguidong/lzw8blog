@@ -1,6 +1,6 @@
 //任务列表
 let Todo = require('../../models/toDo');
-var todoList = async(ctx, next) => {
+var todoList = async (ctx, next) => {
     var page = ctx.query.page || 1;
     await Todo.findAndCountAll({
         limit: 10,
@@ -11,7 +11,7 @@ var todoList = async(ctx, next) => {
         console.log(err);
     })
 }
-var getTodo = async(ctx, next) => {
+var getTodo = async (ctx, next) => {
     var id = ctx.query.id;
     console.log(id);
     await Todo.findAll({
@@ -24,13 +24,14 @@ var getTodo = async(ctx, next) => {
         console.log(err);
     });
 }
-var createTodo = async(ctx, next) => {
-    var { title, stage, relat_href, desc } = ctx.request.body;
+var createTodo = async (ctx, next) => {
+    var { title, stage, relat_href, desc, type } = ctx.request.body;
     var params = {
         title: title || '',
         stage: stage || 0,
         relat_href: relat_href || '',
-        desc: desc || ''
+        desc: desc || '',
+        type: type || 0
     }
     await Todo.create(params).then(() => {
         console.log('创建任务成功');
