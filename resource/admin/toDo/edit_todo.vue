@@ -5,18 +5,17 @@
             <Input v-model="formValidate.title" placeholder="Enter your name"></Input>
         </FormItem>
         <FormItem label="类型">
-          <div class="ivu-radio-wrapper" v-for="(item,index) in todoTypeList" :key="index" >
-            <input type="radio" 
-                class="ivu-radio-input"
-                name="type" 
-                :model="formValidate.type" 
-                :checked="formValidate.type == item.value" 
-                :id="item.value+'typeid'"
-                :value="item.value" :label="item.label">
-            <label for="item.value+'typeid'">
-              {{item.label}}
-            </label>
-          </div>
+          <RadioGroup v-model="formValidate.type">
+            <Radio :label="item.value" :key="index" v-for="(item,index) in todoTypeList">{{item.label}}</Radio>
+          </RadioGroup>
+        </FormItem>
+        <FormItem label="进度">
+          <RadioGroup v-model="formValidate.stage">
+            <Radio :label="item.value" :key="index" v-for="(item,index) in todoStageList">{{item.label}}</Radio>
+          </RadioGroup>
+        </FormItem>
+        <FormItem label="关联链接">
+            <Input v-model="relat_href" placeholder="Enter your href"></Input>
         </FormItem>
          <div class="edit_box">
           <UE :defaultMsg='ueditConfig.content' :config = 'ueditConfig'  ref="ueditor"></UE>
@@ -36,10 +35,10 @@ export default {
     return {
       formValidate: {
         title: "",
-        stage: "",
+        stage: 0,
         relat_href: "",
         desc: "",
-        type: "0"
+        type: 0
       },
       ruleValidate: {
         title: [
@@ -79,6 +78,16 @@ export default {
         {
           value: 1,
           label: "技术积累"
+        }
+      ],
+      todoStageList: [
+        {
+          value: 0,
+          label: "未完成"
+        },
+        {
+          value: 1,
+          label: "已完成"
         }
       ]
     };
