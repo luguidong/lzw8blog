@@ -5,9 +5,18 @@
             <Input v-model="formValidate.title" placeholder="Enter your name"></Input>
         </FormItem>
         <FormItem label="类型">
-            <RadioGroup v-model="formValidate.type">
-                <Radio v-for="(item,index) in todoTypeList" :key="index" :value="item.value" :label="item.label"></Radio>
-            </RadioGroup>
+          <div class="ivu-radio-wrapper" v-for="(item,index) in todoTypeList" :key="index" >
+            <input type="radio" 
+                class="ivu-radio-input"
+                name="type" 
+                :model="formValidate.type" 
+                :checked="formValidate.type == item.value" 
+                :id="item.value+'typeid'"
+                :value="item.value" :label="item.label">
+            <label for="item.value+'typeid'">
+              {{item.label}}
+            </label>
+          </div>
         </FormItem>
          <div class="edit_box">
           <UE :defaultMsg='ueditConfig.content' :config = 'ueditConfig'  ref="ueditor"></UE>
@@ -30,7 +39,7 @@ export default {
         stage: "",
         relat_href: "",
         desc: "",
-        type: "学习"
+        type: "0"
       },
       ruleValidate: {
         title: [
