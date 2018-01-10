@@ -1,5 +1,5 @@
 //任务列表
-let Todo = require('../../models/toDo');
+let Todo = require('../../models/Todo');
 var todoList = async (ctx, next) => {
     var page = ctx.query.page || 1;
     await Todo.findAndCountAll({
