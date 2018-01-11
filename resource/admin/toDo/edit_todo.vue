@@ -13,6 +13,8 @@
           <RadioGroup v-model="formValidate.stage">
             <Radio :label="item.value" :key="index" v-for="(item,index) in todoStageList">{{item.label}}</Radio>
           </RadioGroup>
+          <MlGroup v-model="testGroup"></MlGroup>
+          外面{{testGroup}}
         </FormItem>
         <FormItem label="关联链接">
             <Input v-model="formValidate.relat_href" placeholder="Enter your href"></Input>
@@ -30,9 +32,11 @@
 </template>
 <script>
 import UE from "../../global/editor.vue";
+import MlGroup from "../../global/radio/mlRadioGroup.vue";
 export default {
   data() {
     return {
+      testGroup: 0,
       formValidate: {
         title: "",
         stage: 0,
@@ -142,7 +146,8 @@ export default {
     }
   },
   components: {
-    UE
+    UE,
+    MlGroup
   }
 };
 </script>
