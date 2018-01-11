@@ -1,6 +1,6 @@
 //任务列表
 let Todo = require('../../models/Todo');
-var todoList = async (ctx, next) => {
+var todoList = async(ctx, next) => {
     var page = ctx.query.page || 1;
     await Todo.findAndCountAll({
         limit: 10,
@@ -11,7 +11,7 @@ var todoList = async (ctx, next) => {
         console.log(err);
     })
 }
-var getTodo = async (ctx, next) => {
+var getTodo = async(ctx, next) => {
     var id = ctx.query.id;
     console.log(id);
     await Todo.findAll({
@@ -24,7 +24,7 @@ var getTodo = async (ctx, next) => {
         console.log(err);
     });
 }
-var createTodo = async (ctx, next) => {
+var createTodo = async(ctx, next) => {
     var { title, stage, relat_href, desc, type } = ctx.request.body;
     var params = {
         title: title || '',
@@ -41,9 +41,31 @@ var createTodo = async (ctx, next) => {
         console.log(err);
     })
 }
+var editTodo = async(ctx, next) => {
+    let { id, title, stage, relat_href, desc, type } = ctx.request.body;
+    let params = {
+        title: title,
+        stage: stage,
+        relat_href: relat_href,
+        desc: desc,
+        type: type
+    }
+    await Todo.update(params, {
+        where: {
+            id: id
+        }
+    }).then((res) => {
+        console.log('更新结果' + res);
+        ctx.rest({ code: 0, data: {}, msg: '更新成功' });
+    }).catch(err => {
+        console.log('err' + err);
+        ctx.rest({ code: 1, data: {}, msg: err });
+    })
+}
 
 module.exports = {
     'GET /api/todoList': todoList,
     'POST /api/createTodo': createTodo,
-    'GET /api/getTodoInfo': getTodo
+    'GET /api/getTodoInfo': getTodo,
+    'POST /api/editTodo': editTodo
 }

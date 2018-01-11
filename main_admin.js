@@ -40,7 +40,6 @@ router.beforeEach((to, from, next) => {
     var url = '/api/checkLogin'
     axios.get(url, {}).then((data) => {
         if (data.data.data.isLogin == 0) {
-            console.log('登录成功');
             next();
         } else {
             window.location.href = '/login'

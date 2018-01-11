@@ -1,10 +1,10 @@
 <template>
 <div class="nav_con">
   <div class="header_box">
-        <Dropdown placement="bottom-end">
+        <Dropdown placement="bottom-end" @on-click="topOperate" >
             <img class="header_img" src="/public/images/logo.png" alt="">
             <Dropdown-menu slot="list">
-                <Dropdown-item>退出登录</Dropdown-item>
+                <Dropdown-item name="login_out">退出登录</Dropdown-item>
             </Dropdown-menu>
         </Dropdown>
   </div>
@@ -23,6 +23,19 @@ export default {
     },
     handleClose() {
       this.visible = false;
+    },
+    topOperate(name) {
+      console.log(name);
+      if (name == "login_out") {
+        this.loginOut();
+      }
+    },
+    loginOut() {
+      this.$netWork.get("/api/loginOut", {}, data => {
+        if (data.code == 0) {
+          window.location.href = "/";
+        }
+      });
     }
   }
 };

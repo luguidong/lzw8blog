@@ -9,7 +9,8 @@ export default {
   name: "UE",
   data() {
     return {
-      editor: null
+      editor: null,
+      editorReady: false
     };
   },
   props: {
@@ -28,8 +29,16 @@ export default {
     this.editor = UE.getEditor("editor", this.config); // 初始化UE
     this.editor.addListener("ready", function() {
       //console.log("打算放入内容");
+      _this.editorReady = true;
       _this.editor.setContent(_this.defaultMsg); // 确保UE加载完成后，放入内容。
     });
+  },
+  watch: {
+    defaultMsg(newVal) {
+      if (this.editorReady) {
+        this.editor.setContent(this.defaultMsg);
+      }
+    }
   },
   methods: {
     getUEContent() {

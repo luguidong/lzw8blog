@@ -15,7 +15,7 @@
           </RadioGroup>
         </FormItem>
         <FormItem label="关联链接">
-            <Input v-model="relat_href" placeholder="Enter your href"></Input>
+            <Input v-model="formValidate.relat_href" placeholder="Enter your href"></Input>
         </FormItem>
          <div class="edit_box">
           <UE :defaultMsg='ueditConfig.content' :config = 'ueditConfig'  ref="ueditor"></UE>
@@ -105,7 +105,6 @@ export default {
           for (var item in this.formValidate) {
             params[item] = this.formValidate[item];
           }
-          params.tags = JSON.stringify(params.tags);
           params.desc = this.getUeditorContent();
           var url = "";
           if (this.$route.params.id) {
