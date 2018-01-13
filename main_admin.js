@@ -12,18 +12,24 @@ import iView from 'iview';
 import routers from './resource/admin/router';
 
 //ueditor 
-
 import './public/ueditor/ueditor.config.js';
 import './public/ueditor/ueditor.all.min.js';
 import './public/ueditor/lang/zh-cn/zh-cn.js';
 //加载配置文件
 import './resource/admin/config.js';
 
+//一些自定义公共组件
+import RadioGroup from './resource/global/radio/index.js';
+
+
+
 // import './public/js/ueditor/ueditor.parse.min.js';
 Vue.use(VueRouter);
 Vue.use(Bus);
 Vue.use(NetWork);
 Vue.use(iView);
+
+Vue.use(RadioGroup);
 
 const RouterConfig = {
     mode: 'history', //hash，通过改变浏览器地址栏且不跳转改变页面
