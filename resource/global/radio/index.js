@@ -1,7 +1,5 @@
-import RadioGroup from "./mlRadioGroup.vue";
-
+import RadioGroup from './mlRadio.vue';
 RadioGroup.install = function (Vue) {
-    Vue.component('ml-radio-group', RadioGroup);
+    Vue.component('ml-radio', RadioGroup);
 }
-
 export default RadioGroup;

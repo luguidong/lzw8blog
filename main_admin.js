@@ -19,10 +19,8 @@ import './public/ueditor/lang/zh-cn/zh-cn.js';
 import './resource/admin/config.js';
 
 //一些自定义公共组件
-import RadioGroup from './resource/global/radio/index.js';
-
-
-
+import RadioGroup from './resource/global/radioGroup/index.js';
+import Radio from './resource/global/radio/index.js';
 // import './public/js/ueditor/ueditor.parse.min.js';
 Vue.use(VueRouter);
 Vue.use(Bus);
@@ -30,6 +28,7 @@ Vue.use(NetWork);
 Vue.use(iView);
 
 Vue.use(RadioGroup);
+Vue.use(Radio);
 
 const RouterConfig = {
     mode: 'history', //hash，通过改变浏览器地址栏且不跳转改变页面

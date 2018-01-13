@@ -13,15 +13,16 @@
           <RadioGroup v-model="formValidate.stage">
             <Radio :label="item.value" :key="index" v-for="(item,index) in todoStageList">{{item.label}}</Radio>
           </RadioGroup>
-          <ml-radio-group v-model="testGroup"></ml-radio-group>
-          外面{{testGroup}}
+          <ml-radio-group v-model="testGroup">
+            <ml-radio v-for="(item,index) in todoTypeList" :label="item.value" :key="index">{{item.label}}</ml-radio>
+          </ml-radio-group>
         </FormItem>
         <FormItem label="关联链接">
             <Input v-model="formValidate.relat_href" placeholder="Enter your href"></Input>
         </FormItem>
-         <div class="edit_box">
-          <UE :defaultMsg='ueditConfig.content' :config = 'ueditConfig'  ref="ueditor"></UE>
-        </div>
+          <div class="edit_box">
+            <UE :defaultMsg='ueditConfig.content' :config = 'ueditConfig'  ref="ueditor"></UE>
+          </div>
         <FormItem>
             <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
             <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
