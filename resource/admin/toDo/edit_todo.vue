@@ -13,9 +13,6 @@
           <RadioGroup v-model="formValidate.stage">
             <Radio :label="item.value" :key="index" v-for="(item,index) in todoStageList">{{item.label}}</Radio>
           </RadioGroup>
-          <ml-radio-group v-model="testGroup">
-            <ml-radio v-for="(item,index) in todoTypeList" :label="item.value" :key="index">{{item.label}}</ml-radio>
-          </ml-radio-group>
         </FormItem>
         <FormItem label="关联链接">
             <Input v-model="formValidate.relat_href" placeholder="Enter your href"></Input>
