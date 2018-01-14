@@ -1,6 +1,9 @@
 <template>
   <div class="side_container">
       <span class="title">Start</span>
+      <span class="title">Vue</span>
+      <span class="title">js</span>
+      <span class="title">ndoe</span>
   </div>
 </template>
 <script>
