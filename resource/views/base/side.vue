@@ -1,26 +1,55 @@
 <template>
-  <div class="side_container">
-      <span class="title">Start</span>
+  <div class="side_container" :class="{active:showSideBar}">
       <span class="title">Vue</span>
       <span class="title">js</span>
-      <span class="title">ndoe</span>
+      <span class="title">node</span>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      showSideBar: false
+    };
+  },
+  created() {
+    let that = this;
+    this.$bus.on("changeSidebar", () => {
+      that.showSideBar = !that.showSideBar;
+      that.$bus.emit("setMbState");
+    });
+  }
+};
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass" scoped> 
+    @import '../../css/view_base.scss';
     .side_container{
         border-right:1px solid #dedede;
         bottom:0;
         min-height:600px;
+        position:absolute;
+        width:200px;
+        top:60px;
+        background:#fff;
     }
     .title{
-        font-size:24px;
+        font-size:20px;
         display:block;
         color:#409EFF;
         padding:20px;
         text-align:center;
+        cursor:pointer;
+    }
+    @include tablet{
+        .side_container{
+            position:fixed;
+            left:-200px;
+            transition-property:left;
+            transition-duration:0.2s;
+            &.active{
+                left:0;
+            }
+        }
     }
 </style>

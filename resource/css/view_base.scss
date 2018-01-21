@@ -1,0 +1,17 @@
+$EC1: #409EFF;
+$EC2: #F56C6C;
+$EC3:#303133;
+$EC4:#606266;
+$EC5:#dedede;
+$EC10:#fff;
+@mixin tablet {
+    @media screen and (max-width: 990px) {
+        @content
+    }
+}
+
+@mixin desktop {
+    @media (min-width: 991px) {
+        @content
+    }
+}

@@ -34,6 +34,9 @@ export default {
   }
 };
 </script>
-<style>
-
+<style lang='sass' scoped>
+  @import "../../css/view_base.scss";
+  .com_contain {
+    color: $EC3;
+  }
 </style>

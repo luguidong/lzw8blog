@@ -8,21 +8,20 @@ axios.defaults.withCredentials = true;
 import NetWork from './resource/js/libs/net-work'
 import Routers from './resource/views/router';
 //按需引入element
-import Element from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css'
+//import Element from 'element-ui';
+//import 'element-ui/lib/theme-chalk/index.css'
 //reset.css
-import './resource/css/view_rest.css';
+//import './resource/css/view_rest.scss';
 
 Vue.use(VueRouter);
 Vue.use(Bus);
 Vue.use(NetWork);
-Vue.use(Element);
+//Vue.use(Element);
 
 const RouterConfig = {
     mode: 'history', //hash，通过改变浏览器地址栏且不跳转改变页面
     routes: Routers
 };
-
 const router = new VueRouter(RouterConfig);
 router.beforeEach((to, from, next) => {
     if (to.meta.title) {

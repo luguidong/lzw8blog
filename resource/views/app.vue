@@ -15,3 +15,7 @@ export default {
   created() {}
 };
 </script>
+<style lang='sass'>
+@import "../css/view_rest";
+
+</style>

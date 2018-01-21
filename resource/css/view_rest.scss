@@ -1,0 +1,28 @@
+@import "view_base.scss";
+html,
+body {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Helvetica, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: $EC1;
+}
+
+ul,
+ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.com_contain {
+    padding: 20px;
+}
