@@ -130,7 +130,7 @@ export default {
         display:none;
       }
       .mobile_title{
-        
+        display:none;
       }
     }
     @include tablet{
