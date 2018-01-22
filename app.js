@@ -1,4 +1,4 @@
-let staticFiles = require('./middleware/static-files');
+let staticFiles = require('./app/middleware/static-files');
 const isProduction = process.env.NODE_ENV === 'production';
 //导入koa
 const Koa = require('koa');
@@ -7,22 +7,22 @@ const bodyParser = require('koa-bodyparser');
 //koa-router返回的是函数
 const router = require('koa-router')();
 //创建一个Koa对象表示web app本身
-const controller = require('./middleware/controller');
-const templating = require('./middleware/templating');
+const controller = require('./app/middleware/controller');
+const templating = require('./app/middleware/templating');
 const session = require('koa-session2');
 //设置允许跨域
 const cors = require('koa2-cors');
 const path = require('path');
 
 //判断是否需要登录和是否已登录状态的中间件
-const userMiddle = require('./middleware/userMiddle');
+const userMiddle = require('./app/middleware/userMiddle');
 
-const model = require('./middleware/model');
+const model = require('./app/middleware/model');
 //mysql操作
 const Sequelize = require('sequelize');
 //日志
 const logger = require('koa-logger');
-const rest = require('./middleware/rest');
+const rest = require('./app/middleware/rest');
 //文件上传
 const koaBody = require('koa-body');
 const serve = require('koa-static');
@@ -33,10 +33,10 @@ app.use(koaBody({ multipart: true }));
 //app.use(bodyParser());
 
 //app.use(serve(path.join(__dirname, '/public')));
-const ueditor = require('./middleware/ueditor');
+const ueditor = require('./app/middleware/ueditor');
 app.use(ueditor('/public', __dirname + '/public'));
 //session持久化
-const Store = require("./libs/Store.js");
+const Store = require("./app/libs/Store.js");
 app.use(session({
     store: new Store()
 }));

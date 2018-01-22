@@ -14,6 +14,6 @@ module.exports = db.defineModel('todo', {
     desc: db.TEXT,
     type: {
         type: db.INTEGER,
-        defaultValue: 0//任务类型，0 private:个人学习的内容，不对外，1 个人积累的教程 
+        defaultValue: 0 //任务类型，0 private:个人学习的内容，不对外，1 个人积累的教程 
     }
 })
