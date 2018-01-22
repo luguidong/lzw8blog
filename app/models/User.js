@@ -9,7 +9,10 @@ module.exports = db.defineModel('users', {
     name: db.STRING(100),
     gender: db.BOOLEAN,
     phone: db.STRING(11),
-    is_admin: db.BOOLEAN,
+    is_admin: {
+        type: db.BOOLEAN,
+        defaultValue: false
+    },
     authority: {
         type: db.STRING(200),
         defaultValue: '[]'
