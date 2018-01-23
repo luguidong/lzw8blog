@@ -61,7 +61,7 @@ router.afterEach((to, from, next) => {
 });
 
 
-new Vue({
+var app = new Vue({
     el: '#app',
     router,
     render: h => {

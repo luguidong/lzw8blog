@@ -3,7 +3,8 @@ const commentList = require('./comments/comment.vue');
 const editArticle = require('./article/edit_article.vue');
 const todoList = require('./toDo/todo_list.vue');
 const editTodo = require('./toDo/edit_todo.vue');
-
+const userList = require('./user/user_list.vue');
+const editUser = require('./user/editUser.vue');
 const Routers = [
 {
     path: '/admin/index',
@@ -53,6 +54,20 @@ const Routers = [
         title: 'toDo'
     },
     component: editTodo
+},
+{
+    path: '/admin/user_list',
+    meta: {
+        title: '用户列表'
+    },
+    component: userList
+},
+{
+    path: '/admin/create_user',
+    meta: {
+        title: '新建用户'
+    },
+    component: editUser
 },
 {
     path: '*',

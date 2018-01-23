@@ -17,7 +17,7 @@
                         <Icon type="ios-people"></Icon>
                         用户管理
                     </template>
-                    <Menu-item key="2-1" name='2-1'>新增用户</Menu-item>
+                    <Menu-item name='user_list'>用户列表</Menu-item>
                     <Menu-item key="2-2" name='2-2'>活跃用户</Menu-item>
                 </Submenu>
                 <Submenu key="3" name='3'>
@@ -59,6 +59,9 @@ export default {
           break;
         case "todo_list":
           this.$router.push("/admin/todo_list");
+          break;
+        case "user_list":
+          this.$router.push("/admin/user_list");
           break;
       }
     }
