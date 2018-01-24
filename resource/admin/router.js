@@ -4,7 +4,7 @@ const editArticle = require('./article/edit_article.vue');
 const todoList = require('./toDo/todo_list.vue');
 const editTodo = require('./toDo/edit_todo.vue');
 const userList = require('./user/user_list.vue');
-const editUser = require('./user/editUser.vue');
+const editUser = require('./user/edit_user.vue');
 const Routers = [
 {
     path: '/admin/index',
