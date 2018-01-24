@@ -60,10 +60,12 @@ router.afterEach((to, from, next) => {
     iView.LoadingBar.finish();
 });
 
+import store from './resource/admin/store.js';
 
 var app = new Vue({
     el: '#app',
     router,
+    store,
     render: h => {
         return h(App)
     }

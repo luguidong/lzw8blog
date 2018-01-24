@@ -44,7 +44,8 @@
     "retry-as-promised": "^2.3.2",
     "sequelize": "^3.30.4",
     "ueditor": "^1.2.3",
-    "vue-layer": "^0.8.5"
+    "vue-layer": "^0.8.5",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "babel": "^6.23.0",
