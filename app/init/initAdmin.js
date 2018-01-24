@@ -27,15 +27,12 @@ var pwd = hash.digest('hex');
     } else {
         //不存在管理员，新建
         User.create({
-            id: 'u-0',
             name: 'melon',
-            gender: 'true',
+            gender: 0,
             phone: '13638105937',
             is_admin: 'true',
             passwd: pwd,
-            email: '920430764@qq.com',
-            createdAt: '1993-12-26',
-            updatedAt: now
+            email: '920430764@qq.com'
         }).then(function (p) {
             console.log('initadmin:' + JSON.stringify(p));
         }).catch(function (err) {
