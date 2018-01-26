@@ -3,14 +3,12 @@
     <Row> 
         <i-col span="8">
             <Menu @on-select="handleHref" width='200px' :theme="theme2" active-key="1-2" :open-keys="['1']" name='menu' :accordion="true">
-                <Submenu key="1" name='1'>
+                <Submenu :key="index" :name='index' v-for="(item,index) in $router.options.routes">
                     <template slot="title">
-                        <Icon type="ios-paper"></Icon>
-                        内容管理
+                        <Icon :type="item.iconClass"></Icon>
+                        {{item.label}}
                     </template>
-                    <Menu-item name='article_manage'>文章管理</Menu-item>
-                    <Menu-item name='comment_manage'>评论管理</Menu-item>
-                    <Menu-item name='todo_list'>To Do List</Menu-item>
+                    <Menu-item v-for="(child,cIndex) in item.children" :key="cIndex" :name='child.name'>{{child.label}}</Menu-item>
                 </Submenu>
             </Menu>
         </i-col>
@@ -24,23 +22,13 @@ export default {
       theme2: "dark"
     };
   },
+  created() {
+    console.log(this.$router);
+  },
   methods: {
     handleHref(name) {
       console.log("点击事件" + name);
-      switch (name) {
-        case "article_manage":
-          this.$router.push("/admin/article");
-          break;
-        case "comment_manage":
-          this.$router.push("/admin/comment");
-          break;
-        case "todo_list":
-          this.$router.push("/admin/todo_list");
-          break;
-        case "user_list":
-          this.$router.push("/admin/user_list");
-          break;
-      }
+      this.$router.push({ name: name });
     }
   }
 };

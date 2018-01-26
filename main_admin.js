@@ -35,7 +35,7 @@ Vue.use(Radio);
 store.dispatch('initRouters', []).then(data => {
     console.log('初始路由');
     console.log(data);
-    initVue(routers);
+    initVue(data);
 })
 
 function initVue(routers) {

@@ -18,9 +18,15 @@ const store = new Vuex.Store({
             return new Promise((resolve, reject) => {
                 let authorities = ['article_list', 'create_article'],
                     initRouters = [];
-                initRouters = routers.filter(item => {
-                    if (authorities.indexOf(item.name) > -1) {
-                        return true;
+                routers.forEach(item => {
+                    let childs = item.children.filter(citem => {
+                        if (authorities.indexOf(citem.name) > -1) {
+                            return true;
+                        }
+                    })
+                    if (childs.length > 0) {
+                        item.children = childs;
+                        initRouters.push(item);
                     }
                 })
                 resolve(initRouters);
