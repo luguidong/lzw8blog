@@ -9,8 +9,10 @@ import NetWork from './resource/js/libs/net-work'
 import './resource/css/style.css';
 import 'iview/dist/styles/iview.css';
 import iView from 'iview';
-import routers from './resource/admin/router';
-
+//整体路由
+import { routers } from './resource/admin/router';
+//vuex
+import store from './resource/admin/store.js';
 //ueditor 
 import './public/ueditor/ueditor.config.js';
 import './public/ueditor/ueditor.all.min.js';
@@ -30,43 +32,47 @@ Vue.use(iView);
 Vue.use(RadioGroup);
 Vue.use(Radio);
 
-const RouterConfig = {
-    mode: 'history', //hash，通过改变浏览器地址栏且不跳转改变页面
-    routes: routers
-};
+store.dispatch('initRouters', []).then(data => {
+    console.log('初始路由');
+    console.log(data);
+    initVue(routers);
+})
 
-const router = new VueRouter(RouterConfig);
-router.beforeEach((to, from, next) => {
-    window.document.title = to.meta.title;
-    //next();
-    //校验登录态,next(false)可以取消导航
-    //进度条
-    iView.LoadingBar.start();
-    var url = '/api/checkLogin'
-    axios.get(url, {}).then((data) => {
-        if (data.data.data.isLogin == 0) {
-            next();
-        } else {
-            window.location.href = '/login'
+function initVue(routers) {
+    const RouterConfig = {
+        mode: 'history', //hash，通过改变浏览器地址栏且不跳转改变页面
+        routes: routers
+    };
+    const router = new VueRouter(RouterConfig);
+    router.beforeEach((to, from, next) => {
+        window.document.title = to.meta.title;
+        //进度条
+        iView.LoadingBar.start();
+        var url = '/api/checkLogin'
+        axios.get(url, {}).then((data) => {
+            if (data.data.data.isLogin == 0) {
+                next();
+            } else {
+                window.location.href = '/login'
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+
+    });
+    router.afterEach((to, from, next) => {
+        //进入页面后回到顶部
+        window.scrollTo(0, 0);
+        iView.LoadingBar.finish();
+    });
+
+
+    var app = new Vue({
+        el: '#app',
+        router,
+        store,
+        render: h => {
+            return h(App)
         }
-    }).catch((err) => {
-        console.log(err);
-    })
-
-});
-router.afterEach((to, from, next) => {
-    //进入页面后回到顶部
-    window.scrollTo(0, 0);
-    iView.LoadingBar.finish();
-});
-
-import store from './resource/admin/store.js';
-
-var app = new Vue({
-    el: '#app',
-    router,
-    store,
-    render: h => {
-        return h(App)
-    }
-});
+    });
+}
