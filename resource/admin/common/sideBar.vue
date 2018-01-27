@@ -3,7 +3,7 @@
     <Row> 
         <i-col span="8">
             <Menu @on-select="handleHref" width='200px' :theme="theme2" active-key="1-2" :open-keys="['1']" name='menu' :accordion="true">
-                <Submenu :key="index" :name='index' v-for="(item,index) in $router.options.routes">
+                <Submenu :key="index" :name='index' v-if="!item.isBaseRoute" v-for="(item,index) in $router.options.routes">
                     <template slot="title">
                         <Icon :type="item.iconClass"></Icon>
                         {{item.label}}

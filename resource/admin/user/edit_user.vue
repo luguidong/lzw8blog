@@ -9,10 +9,9 @@
           </FormItem>
           <FormItem label="权限" prop='authority'>
               <CheckboxGroup v-model="formValidate.authority">
-                <Checkbox label='article_list'>文章列表</Checkbox>
-                <Checkbox label='create_article'>新建文章</Checkbox>
-                <Checkbox label='user_list'>用户列表</Checkbox>
-                <Checkbox label='create_user'>新建用户</Checkbox>
+                <Checkbox :label='item.name' :key="index" v-for="(item,index) in $store.state.allUserAuth">
+                  {{item.label}}
+                </Checkbox>
               </CheckboxGroup>
           </FormItem>
           <FormItem>

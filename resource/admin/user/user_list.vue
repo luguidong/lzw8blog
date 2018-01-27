@@ -35,6 +35,20 @@ export default {
                   }
                 },
                 "编辑"
+              ),
+              h(
+                "Button",
+                {
+                  props: {
+                    type: "ghost"
+                  },
+                  on: {
+                    click: () => {
+                      this.deleteUser(params.row.id);
+                    }
+                  }
+                },
+                "删除"
               )
             ]);
           }
@@ -66,7 +80,21 @@ export default {
       this.$router.push("/admin/create_user");
     },
     editUser() {},
-    gotoPage(id) {}
+    gotoPage(index) {
+      this.currentPage = index;
+      this.getUserList();
+    },
+    deleteUser(id) {
+      var params = {
+        id: id
+      };
+      this.$netWork.get("/api/deleteUser", params, data => {
+        if (data.code == 0) {
+          this.$Message.success("删除成功");
+          this.getUserList();
+        }
+      });
+    }
   }
 };
 </script>

@@ -11,8 +11,7 @@ import 'iview/dist/styles/iview.css';
 import iView from 'iview';
 //整体路由
 import { routers } from './resource/admin/router';
-//vuex
-import store from './resource/admin/store.js';
+
 //ueditor 
 import './public/ueditor/ueditor.config.js';
 import './public/ueditor/ueditor.all.min.js';
@@ -28,15 +27,17 @@ Vue.use(VueRouter);
 Vue.use(Bus);
 Vue.use(NetWork);
 Vue.use(iView);
-
 Vue.use(RadioGroup);
 Vue.use(Radio);
 
-store.dispatch('initRouters', []).then(data => {
-    console.log('初始路由');
-    console.log(data);
-    initVue(data);
+//vuex
+import store from './resource/admin/store.js';
+store.dispatch('getUserAuth').then(data => {
+    store.dispatch('initRouters', data).then(data => {
+        initVue(data);
+    })
 })
+
 
 function initVue(routers) {
     const RouterConfig = {
@@ -65,8 +66,6 @@ function initVue(routers) {
         window.scrollTo(0, 0);
         iView.LoadingBar.finish();
     });
-
-
     var app = new Vue({
         el: '#app',
         router,

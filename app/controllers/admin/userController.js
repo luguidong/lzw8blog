@@ -8,7 +8,7 @@ function getHashValue(value) {
     return hash.digest('hex');
 }
 
-var userList = async(ctx, next) => {
+var userList = async (ctx, next) => {
     var page = ctx.query.page || 1;
     await User.findAndCountAll({
         limit: 10,
@@ -21,7 +21,7 @@ var userList = async(ctx, next) => {
     })
 }
 
-var createUser = async(ctx, next) => {
+var createUser = async (ctx, next) => {
     let { name, passwd, authority } = ctx.request.body;
     if (name == '' || passwd == '' || authority == '') {
         ctx.rest({ code: 1, data: {}, msg: '参数不正确' });
@@ -42,8 +42,35 @@ var createUser = async(ctx, next) => {
         ctx.rest({ code: 2, data: params, msg: '创建失败' });
     })
 }
-
+var getUserAuthority = async (ctx, next) => {
+    let appid = ctx.session.appid;
+    if (!appid) ctx.rest({ code: 10, data: {}, msg: '用户未登录或已过期' });
+    await User.find({
+        where: {
+            id: appid
+        }
+    }).then(data => {
+        ctx.rest({ code: 0, data: { auth: data.authority }, msg: '获取成功' });
+    }).catch(err => {
+        ctx.rest({ code: -1, data: {}, msg: '服务器错误' });
+        console.log(err);
+    })
+}
+var deleteUser = async (ctx, next) => {
+    let { userId } = ctx.request.query;
+    await User.destroy({
+        where: {
+            id: userId
+        }
+    }).then(res => {
+        ctx.rest({ code: 0, data: {}, msg: '删除成功' });
+    }).catch(err => {
+        console.log(err);
+    })
+}
 module.exports = {
     "GET /api/getUserList": userList,
-    "POST /api/createUser": createUser
+    "POST /api/createUser": createUser,
+    "GET /api/getUserAuth": getUserAuthority,
+    "GET /api/deleteUser": deleteUser
 }

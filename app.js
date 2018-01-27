@@ -61,9 +61,8 @@ app.use(templating('public', {
     noCache: !isProduction,
     watch: !isProduction
 }))
-
-app.use(userMiddle());
 app.use(rest.restify());
+app.use(userMiddle());
 app.use(controller());
 
 //在端口3000监听

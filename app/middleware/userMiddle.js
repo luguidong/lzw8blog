@@ -1,14 +1,13 @@
+function checkAuth(url) {
+    return async (ctx, next) => {
 
-function checkAuth(url){
-    return async(ctx,next)=>{
-        
-        if(false){
+        if (true) {
             await next();
             //res.redirect('/login');
-        }else{
-            await next();
+        } else {
+            ctx.rest({ code: 10, data: {}, msg: '用户未登录' });
         }
-        
+
     }
 }
 
