@@ -38,7 +38,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.editArticle(params.row.id);
+                      this.editTodo(params.row.id);
                     }
                   }
                 },
@@ -70,7 +70,7 @@ export default {
         }
       });
     },
-    editArticle(id) {
+    editTodo(id) {
       this.$router.push("/admin/edit_todo/" + id);
     },
     gotoPage(index) {

@@ -10,6 +10,10 @@ import './resource/css/style.css';
 import './resource/css/iview.css';
 import iView from 'iview';
 
+import "./public/ueditor/ueditor.config.js";
+import "./public/ueditor/ueditor.all.min.js";
+import "./public/ueditor/lang/zh-cn/zh-cn.js";
+
 Vue.use(iView);
 Vue.use(VueRouter);
 Vue.use(Bus);
@@ -19,6 +23,7 @@ Vue.use(NetWork);
 import store from './resource/admin/store.js';
 store.dispatch('getUserAuth').then(data => {
     store.dispatch('initRouters', data).then(data => {
+        console.log(data);
         initVue(data);
     })
 })

@@ -45,8 +45,8 @@ export const routers = [
             },
             {
                 path: '/admin/edit_article/:id',
-                neme: 'edit_article',
-                label: '编辑文章',
+                name: 'edit_article',
+                isEdit: true,
                 meta: {
                     title: '编辑文章'
                 },
@@ -73,7 +73,7 @@ export const routers = [
             {
                 path: '/admin/edit_todo/:id',
                 name: 'edit_todo',
-                label: '编辑任务',
+                isEdit: true,
                 meta: {
                     title: 'toDo'
                 },

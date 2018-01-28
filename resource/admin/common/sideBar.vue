@@ -7,7 +7,7 @@
                 <Icon :type="item.iconClass"></Icon>
                 {{item.label}}
             </template>
-            <Menu-item v-for="(child,cIndex) in item.children" :key="cIndex" :name='child.name'>{{child.label}}</Menu-item>
+            <Menu-item v-for="(child,cIndex) in item.children" v-if="!child.isEdit" :key="cIndex" :name='child.name'>{{child.label}}</Menu-item>
         </Submenu>
     </Menu>
     

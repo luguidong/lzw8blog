@@ -80,6 +80,8 @@ export default {
       );
     },
     editArticle(id) {
+      console.log(id);
+      console.log(this.$router);
       this.$router.push("/admin/edit_article/" + id);
     },
     gotoPage(index) {
