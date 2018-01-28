@@ -26,6 +26,7 @@ export default {
   },
   mounted() {
     const _this = this;
+    this.initEditor();
     this.editor = UE.getEditor("editor", this.config); // 初始化UE
     this.editor.addListener("ready", function() {
       //console.log("打算放入内容");
@@ -44,6 +45,53 @@ export default {
     getUEContent() {
       // 获取内容方法
       return this.editor.getContent();
+    },
+    initEditor() {
+      let ueditor_config = {
+        toolbars: [
+          [
+            "undo",
+            "redo",
+            "|",
+            "fontsize",
+            "forecolor",
+            "bold",
+            "italic",
+            "underline",
+            "|",
+
+            "justifyleft",
+            "justifycenter",
+            "justifyright",
+            "justifyjustify",
+            "lineheight",
+            "|",
+            "directionalityltr",
+            "directionalityrtl",
+            "indent",
+            "|",
+
+            "simpleupload",
+            "insertframe",
+            "emotion",
+            "|",
+
+            "backcolor",
+            "autotypeset",
+            "link",
+            "spechars",
+            "source",
+            "|",
+            "searchreplace",
+            "|",
+            "fullscreen" //全屏
+          ]
+        ],
+        initialFrameWidth: 700,
+        initialFrameHeight: 320,
+        autoHeightEnabled: false
+      };
+      Object.assign(UEDITOR_CONFIG, ueditor_config);
     }
   },
   destroyed() {

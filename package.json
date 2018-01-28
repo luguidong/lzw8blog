@@ -10,7 +10,8 @@
     "build": "webpack --progress --hide-modules --config build/webpack.views.prod.js",
     "build_admin": "webpack --progress --hide-modules --config build/webpack.admin.prod.js",
     "vue": "webpack --progress --hide-modules --config build/webpack.copy.js",
-    "lzw": "node app.js set process.env.NODE_ENV = production"
+    "lzw": "node app.js set process.env.NODE_ENV = production",
+    "analyz": "webpack-bundle-analyzer bundle/output/path/stats.json"
   },
   "keywords": [
     "koa",
@@ -37,6 +38,7 @@
     "koa-ueditor": "^1.0.0",
     "koa2-cookie-session": "^0.0.1",
     "koa2-cors": "^2.0.5",
+    "moment": "^2.20.1",
     "mz": "^2.7.0",
     "node-uuid": "^1.4.8",
     "nunjucks": "^3.0.1",
@@ -45,18 +47,20 @@
     "sequelize": "^3.30.4",
     "ueditor": "^1.2.3",
     "vue-layer": "^0.8.5",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "webpack-bundle-analyzer": "^2.9.2"
   },
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.24.0",
+    "babel-core": "^6.26.0",
     "babel-loader": "^6.4.1",
     "babel-plugin-component": "^1.0.0",
     "babel-plugin-import": "^1.6.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-runtime": "^6.23.0",
     "browser-sync": "^2.18.13",
     "clean-webpack-plugin": "^0.1.17",

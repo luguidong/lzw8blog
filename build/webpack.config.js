@@ -1,5 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 const config = {
     watch: true,
@@ -34,6 +36,7 @@ const config = {
                     "presets": [
                         ['es2015', { modules: false }]
                     ],
+                    plugins: ['syntax-dynamic-import']
                 }
             },
             {
@@ -49,7 +52,8 @@ const config = {
             }]
     },
     plugins: [
-        new ExtractTextPlugin('main.css')
+        new ExtractTextPlugin('main.css'),
+        new BundleAnalyzerPlugin()
     ],
     devServer: {
         historyApiFallback: true,

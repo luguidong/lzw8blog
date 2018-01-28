@@ -57,7 +57,7 @@ var getUserAuthority = async (ctx, next) => {
     })
 }
 var deleteUser = async (ctx, next) => {
-    let { userId } = ctx.request.query;
+    let userId = ctx.request.query.id;
     await User.destroy({
         where: {
             id: userId

@@ -50,7 +50,7 @@ export default {
           if (data.data.is_login == 0) {
             //登录成功
             console.log("登录成功");
-            window.location.href = "/admin/index";
+            window.location.href = "/admin/";
           } else {
             that.mistake_pw = true;
             setTimeout(function() {
@@ -146,6 +146,5 @@ export default {
   line-height: 20px;
   cursor: pointer;
 }
-
 </style>
 

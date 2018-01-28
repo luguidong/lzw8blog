@@ -1,10 +1,12 @@
 /****** 公共style **********/
-body{
-    background:#d8d8d8;
-}
-html,div{
+
+body {}
+
+html,
+div {
     outline: none;
 }
-.common_content{
-    padding:30px;
+
+.common_content {
+    padding: 30px;
 }
