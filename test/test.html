@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>iview example</title>
+</head>
+<body>
+<div id="app">
+</div>
+<script>
+    function Parent(param){
+        this.param = param || 'mike';
+        this.eat = function(){
+            console.log(this.param);
+        }
+    }
+    Parent.prototype.say = function(what){
+        console.log(this.name +' say:'+what);
+    }
+    /*
+        1.原型链继承
+        简单易于实现，子类都能访问
+        不能多继承，创建构造函数时，无法向父类构造函数传参
+    */
+    function Child1(){}
+    Child1.prototype = new Parent();
+    Child1.prototype.name = 'child1';
+    var inst1 = new Child1();
+    inst1.say('sdfsdf');
+    console.log(inst1 instanceof Parent);//true
+    
+    /*
+        2.构造继承
+        
+    */
+    console.log('-----2------');
+    function Child2(name){
+        Parent.call(this);
+        this.name = name || 'Child2';
+    }
+    
+  </script>
+</body>
+</html>
