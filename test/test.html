@@ -1,44 +1,107 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>iview example</title>
 </head>
+
 <body>
-<div id="app">
-</div>
-<script>
-    function Parent(param){
-        this.param = param || 'mike';
-        this.eat = function(){
-            console.log(this.param);
+    <div id="app">
+    </div>
+    <script>
+        function Parent(param) {
+            this.param = param || 'mike';
+            this.eat = function () {
+                console.log(this.param);
+            }
         }
-    }
-    Parent.prototype.say = function(what){
-        console.log(this.name +' say:'+what);
-    }
-    /*
-        1.原型链继承
-        简单易于实现，子类都能访问
-        不能多继承，创建构造函数时，无法向父类构造函数传参
-    */
-    function Child1(){}
-    Child1.prototype = new Parent();
-    Child1.prototype.name = 'child1';
-    var inst1 = new Child1();
-    inst1.say('sdfsdf');
-    console.log(inst1 instanceof Parent);//true
-    
-    /*
-        2.构造继承
-        
-    */
-    console.log('-----2------');
-    function Child2(name){
-        Parent.call(this);
-        this.name = name || 'Child2';
-    }
-    
-  </script>
+        Parent.prototype.say = function (what) {
+            console.log(this.name + ' say:' + what);
+        }
+        /*
+            1.原型链继承
+            简单易于实现，子类都能访问
+            不能多继承，创建构造函数时，无法向父类构造函数传参
+        */
+        function Child1() { }
+        Child1.prototype = new Parent();
+        Child1.prototype.name = 'child1';
+        var inst1 = new Child1();
+        inst1.say('sdfsdf');
+        console.log(inst1 instanceof Parent);//true
+
+        /*
+            2.构造继承
+            +：可以在创建实例时传参，通过多个call多继承
+            -：实例不是父类实例，只是子类实例，不继承原型方法，
+            同时每个子类都有父类副本，影响性能
+        */
+        console.log('-----2------');
+        function Child2(name) {
+            Parent.call(this);
+            this.name = name || 'Child2';
+        }
+        console.log(Child2.prototype);
+        var inst2 = new Child2('i child2');
+        console.log(inst2.name);
+        console.log(inst2.eat('sdf'));
+        console.log(inst2 instanceof Parent);
+
+        console.log('-----3------');
+        /*
+            3.实例继承
+            +:不限制调用方式，直接返回父类实例
+            -：实例是父类实例但不是子类的，不支持多继承
+        */
+        function Child3(name) {
+            var instance = new Parent();
+            instance.name = name || 'child3';
+            return instance;
+        }
+        var inst3 = new Child3(name);
+        console.log(inst3.name);
+        console.log(inst3.say('child3'));
+        console.log(inst3 instanceof Child3);
+
+        /*
+            4.组合继承
+            +:同时继承实例属性和原型属性，不存在引用属性共享
+            -：调用两次父类构造函数，生成两份实例
+        */
+        console.log('-----4------');
+        function Child4(name) {
+            Parent.call(this);
+            this.name = name || 'Child4';
+        }
+        Child4.prototype = new Parent();
+        Child4.prototype.constructor = Child4;
+        var inst4 = new Child4();
+        console.log(inst4.name);
+        console.log(inst4.say('hhh'));
+        /*
+            5.寄生组合继承
+            通过寄生方式砍掉父类实例属性，在调用父类构造时不会初始化两次。
+        */
+        console.log('-----5-----')
+        function Child5(name) {
+            Parent.call(this);
+            this.name = name || 'child5';
+        }
+        (function () {
+            //创建一个没有实例方法的类
+            var Super = function () { };
+            Super.prototype = Parent.prototype;
+            Child5.prototype = new Super();
+        })();
+
+        var inst5 = new Child5();
+        console.log(inst5.name);
+        console.log(inst5.say('child5'));
+        console.log(inst5.eat());
+
+
+    </script>
 </body>
+
 </html>

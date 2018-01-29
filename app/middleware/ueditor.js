@@ -21,7 +21,7 @@ function ueditor(url, dir) {
                 ctx.redirect('/public/ueditor/nodejs/config.json');
             }
             else if (action === 'uploadimage' || action === 'uploadfile') {
-                const uploadImage = path.join(__dirname, '../public/upload/images');
+                const uploadImage = path.join(__dirname, '../../public/upload/images');
 
                 // make the temporary directory
                 //await fs.mkdir(tmpdir);
