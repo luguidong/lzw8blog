@@ -78,7 +78,7 @@ function defineModel(name, attributes) {
     return task;
 }
 
-const TYPES = ['STRING', 'INTEGER', 'BIGINT', 'TEXT', 'DOUBLE', 'DATEONLY', 'BOOLEAN'];
+const TYPES = ['STRING', 'INTEGER', 'BIGINT', 'TEXT', 'DOUBLE', 'DATEONLY', 'BOOLEAN', 'JSON'];
 
 var exp = {
     defineModel: defineModel,

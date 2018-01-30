@@ -5,9 +5,8 @@ module.exports = db.defineModel('article', {
     },
     intro: db.STRING(200),
     tags: {
-        type: db.STRING(200),
-        allowNull: true,
-        defaultValue: ''
+        type: db.JSON(200),
+        allowNull: true
     },
     desc: db.TEXT
 })

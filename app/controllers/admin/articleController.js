@@ -1,10 +1,19 @@
 //文章新建、编辑与列表
 let Article = require('../../models/Article');
+let sequelize = require('sequelize');
 var articleList = async (ctx, next) => {
-    var page = ctx.query.page || 1;
+    let { page, type } = ctx.query;
+    page = page || 1;
+    let where = {}
+    if (type && type != 'all') {
+        where = sequelize.where(sequelize.fn('JSON_CONTAINS', sequelize.col('type')), type)
+
+    }
+
     await Article.findAndCountAll({
         limit: 10,
-        offset: 10 * (page - 1)
+        offset: 10 * (page - 1),
+        where: where
     }).then((articles) => {
         ctx.rest({ code: 0, data: articles, msg: '' });
     }).catch((err) => {

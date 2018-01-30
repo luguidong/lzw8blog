@@ -87,7 +87,7 @@ export default {
           for (var item in this.formValidate) {
             params[item] = this.formValidate[item];
           }
-          params.tags = JSON.stringify(params.tags);
+          //params.tags = JSON.stringify(params.tags);
           params.desc = this.getUeditorContent();
           var url = "";
           if (this.$route.params.id) {

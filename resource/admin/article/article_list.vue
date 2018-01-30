@@ -4,6 +4,9 @@
             <Icon type="plus-round" size="14" color="#fff" />
             新建文章
         </Button>
+        <Select v-model="articleTypeValue" style="width:200px;float:right;" @on-change='selectClass'>
+            <Option v-for="item in articleTypeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+        </Select>
         <Table stripe :columns="columns1" :data="articleList"></Table>
         <Page :current="currentPage" :total='articleTotal' style="text-align:center;margin-top:20px;" @on-change='gotoPage'></Page>
     </div>
@@ -50,7 +53,26 @@ export default {
       ],
       articleList: [],
       currentPage: 1,
-      articleTotal: 0
+      articleTotal: 0,
+      articleTypeList: [
+        {
+          value: "all",
+          label: "分类"
+        },
+        {
+          value: "vue",
+          label: "vue"
+        },
+        {
+          value: "js",
+          label: "js"
+        },
+        {
+          value: "node",
+          label: "node"
+        }
+      ],
+      articleTypeValue: "all"
     };
   },
   created() {
@@ -63,16 +85,11 @@ export default {
     getArticleList() {
       this.$netWork.get(
         "/api/articleList",
-        { page: this.currentPage },
+        { page: this.currentPage, type: this.articleTypeValue },
         data => {
           if (data.code == 0) {
             this.articleList = data.data.rows;
             this.articleTotal = data.data.count;
-            this.articleList.forEach((item, index) => {
-              if (item.tags) {
-                this.articleList[index].tags = JSON.parse(item.tags).join(",");
-              }
-            });
           } else {
             this.$Message.err("网络错误，请刷新后重试");
           }
@@ -86,6 +103,10 @@ export default {
     },
     gotoPage(index) {
       this.currentPage = index;
+      this.getArticleList();
+    },
+    selectClass(value) {
+      console.log(value);
       this.getArticleList();
     }
   }
