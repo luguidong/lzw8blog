@@ -12,7 +12,6 @@
             <CheckboxGroup v-model="formValidate.tags">
                 <Checkbox label="js"></Checkbox>
                 <Checkbox label="node"></Checkbox>
-                <Checkbox label="php"></Checkbox>
                 <Checkbox label="vue"></Checkbox>
             </CheckboxGroup>
         </FormItem>
