@@ -7,12 +7,12 @@ var articleList = async (ctx, next) => {
     page = page || 1;
     let where = '';
     if (type && type != 'all') {
-        let sql = ``
+        where = `where JSON_CONTAINS(tags,'["${type}"]')`;
     }
-    let sqlCount = `select count(*) from article where id=?`
+    let sqlCount = `select count(*) from article ${where}`
     let sql = `select 'title', 'intro', 'tags', 'desc', 'id',
         'createdAt', 'updatedAt' from article limit ${10 * (page - 1)},10 ${where}`;
-    await db.sequelize.query(sqlCount, { replacements: ['test'], type: db.sequelize.QueryTypes.SELECT }).then(res => {
+    await db.sequelize.query(sqlCount, { type: db.sequelize.QueryTypes.SELECT }).then(res => {
         console.log('------------');
         console.log(res);
     });
