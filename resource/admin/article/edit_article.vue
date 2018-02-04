@@ -35,7 +35,7 @@ export default {
         title: "",
         intro: "",
         tags: [],
-        desc: ""
+        description: ""
       },
       ruleValidate: {
         title: [
@@ -88,7 +88,7 @@ export default {
             params[item] = this.formValidate[item];
           }
           //params.tags = JSON.stringify(params.tags);
-          params.desc = this.getUeditorContent();
+          params.description = this.getUeditorContent();
           var url = "";
           if (this.$route.params.id) {
             url = "/api/editArticle";
@@ -122,7 +122,7 @@ export default {
           data.data.tags = [];
         }
         this.formValidate = data.data;
-        this.ueditConfig.content = data.data.desc;
+        this.ueditConfig.content = data.data.description;
       });
     },
     getUeditorContent() {

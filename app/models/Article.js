@@ -8,5 +8,5 @@ module.exports = db.defineModel('article', {
         type: db.JSON(200),
         allowNull: true
     },
-    desc: db.TEXT
+    description: db.TEXT
 })

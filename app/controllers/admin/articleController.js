@@ -12,7 +12,8 @@ var articleList = async (ctx, next) => {
     let sqlCount = `select count(*) as count from article ${where}`
     let sqlRows = `select title,intro,tags,id,createdAt,updatedAt from article ${where} limit ${10 * (page - 1)},10`;
 
-    var rows = [], count = 0;
+    var rows = [],
+        count = 0;
     await db.sequelize.query(sqlCount, { type: db.sequelize.QueryTypes.SELECT }).then(res => {
         console.log('---------');
         console.log(res);
@@ -40,7 +41,7 @@ var getArticle = async (ctx, next) => {
     });
 }
 var editArticle = async (ctx, next) => {
-    var { id, title, intro, tags, desc } = ctx.request.body;
+    var { id, title, intro, tags, description } = ctx.request.body;
     var tctx = ctx;
     var article = await Article.findAll({
         where: {
@@ -53,7 +54,7 @@ var editArticle = async (ctx, next) => {
                 article.title = title;
                 article.intro = intro;
                 article.tags = tags;
-                article.desc = desc;
+                article.description = description;
                 await article.save();
                 console.log('已经更新了');
             })().then(() => {
@@ -74,12 +75,12 @@ var editArticle = async (ctx, next) => {
 }
 var createArticle = async (ctx, next) => {
     var col = ctx.request.body;
-    var { title, intro, tags, desc } = col;
+    var { title, intro, tags, description } = col;
     var params = {
         title: title || '',
         intro: intro || '',
         tags: tags || '',
-        desc: desc || ''
+        description: description || ''
     };
     var tctx = ctx;
     await (async (ctx, next) => {

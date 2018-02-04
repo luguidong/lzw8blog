@@ -28,7 +28,7 @@ export default {
           data.data.tags = [];
         }
         this.title = data.data.title;
-        this.content = data.data.desc;
+        this.content = data.data.description;
       });
     }
   }
