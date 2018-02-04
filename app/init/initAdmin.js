@@ -20,7 +20,7 @@ var pwd = hash.digest('hex');
             is_admin: 'true',
             passwd: pwd,
             email: '920430764@qq.com',
-            authority: `['article_list','create_article','user_list','create_user']`
+            authority: `['article_list','create_article','edit_article',user_list','create_user']`
         }
         await User.update(user, {
             where: {

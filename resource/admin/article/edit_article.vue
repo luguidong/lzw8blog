@@ -116,11 +116,6 @@ export default {
     },
     getArticleInfo(id) {
       this.$netWork.get("/api/getArticleInfo", { id: id }, data => {
-        try {
-          data.data.tags = JSON.parse(data.data.tags);
-        } catch (e) {
-          data.data.tags = [];
-        }
         this.formValidate = data.data;
         this.ueditConfig.content = data.data.description;
       });
