@@ -1,10 +1,11 @@
 <template>
   <div class="container">
-    <ul class="article_list">
-        <li v-for="item in articleList">
+    <ul class="article_list" v-if="articleList.length > 0">
+        <li v-for="(item,index) in articleList" :key="index">
             <router-link :to="{path:'/article',query:{id:item.id}}" >{{item.title}}</router-link>
         </li>
     </ul>
+    <p class="article_null" v-else>暂时没有该分类的内容</p>
   </div>
 </template>
 <script>
@@ -12,17 +13,22 @@ export default {
   data() {
     return {
       articleList: [],
-      currentPath: 1
+      currentPath: 1,
+      type: "all"
     };
   },
   created() {
     this.getArticleList();
+    this.$bus.on("selectArticleType", type => {
+      this.type = type;
+      this.getArticleList();
+    });
   },
   methods: {
     getArticleList() {
       this.$netWork.get(
         "/api/articleList",
-        { page: this.currentPage },
+        { page: this.currentPage, type: this.type },
         data => {
           if (data.code == 0) {
             this.articleList = data.data.rows;
@@ -61,5 +67,9 @@ export default {
           height:50px;
           border-bottom:1px solid #EBEEF5;
         }
+    }
+    .article_null{
+      color:#909399;
+      text-align:center;
     }
 </style>

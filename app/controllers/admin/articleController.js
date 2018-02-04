@@ -9,22 +9,21 @@ var articleList = async (ctx, next) => {
     if (type && type != 'all') {
         where = `where JSON_CONTAINS(tags,'["${type}"]')`;
     }
-    let sqlCount = `select count(*) from article ${where}`
-    let sql = `select 'title', 'intro', 'tags', 'desc', 'id',
-        'createdAt', 'updatedAt' from article limit ${10 * (page - 1)},10 ${where}`;
+    let sqlCount = `select count(*) as count from article ${where}`
+    let sqlRows = `select title,intro,tags,id,createdAt,updatedAt from article ${where} limit ${10 * (page - 1)},10`;
+
+    var rows = [], count = 0;
     await db.sequelize.query(sqlCount, { type: db.sequelize.QueryTypes.SELECT }).then(res => {
-        console.log('------------');
+        console.log('---------');
         console.log(res);
+        count = res[0].count;
+        console.log(count);
     });
-    await Article.findAndCountAll({
-        limit: 10,
-        offset: 10 * (page - 1),
-        where: where
-    }).then((articles) => {
-        ctx.rest({ code: 0, data: articles, msg: '' });
-    }).catch((err) => {
-        console.log(err);
+    await db.sequelize.query(sqlRows, { type: db.sequelize.QueryTypes.SELECT }).then(project => {
+        console.log(project);
+        rows = project;
     })
+    ctx.rest({ code: 0, data: { rows, count }, msg: '' });
 }
 
 var getArticle = async (ctx, next) => {

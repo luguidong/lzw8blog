@@ -1,8 +1,8 @@
 <template>
   <div class="side_container" :class="{active:showSideBar}">
-      <span class="title">Vue</span>
-      <span class="title">js</span>
-      <span class="title">node</span>
+      <span class="title" @click="selectType('vue')">Vue</span>
+      <span class="title" @click="selectType('js')">js</span>
+      <span class="title" @click="selectType('node')">node</span>
   </div>
 </template>
 <script>
@@ -18,6 +18,11 @@ export default {
       that.showSideBar = !that.showSideBar;
       that.$bus.emit("setMbState");
     });
+  },
+  methods: {
+    selectType(type) {
+      this.$bus.emit("selectArticleType", type);
+    }
   }
 };
 </script>
