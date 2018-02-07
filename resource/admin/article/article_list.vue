@@ -4,8 +4,11 @@
             <Icon type="plus-round" size="14" color="#fff" />
             新建文章
         </Button>
-        <Select v-model="articleTypeValue" style="width:200px;float:right;" @on-change='selectClass'>
+        <Select v-model="articleTypeValue" style="width:100px;float:right;" @on-change='selectClass'>
             <Option v-for="item in articleTypeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+        </Select>
+        <Select v-model="articleStateValue" style="width:100px;float:right;" @on-change='selectState'>
+            <Option v-for="item in articleStateList" :value="item.value" :key="item.value">{{ item.label }}</Option>
         </Select>
         <Table stripe :columns="columns1" :data="articleList"></Table>
         <Page :current="currentPage" :total='articleTotal' style="text-align:center;margin-top:20px;" @on-change='gotoPage'></Page>
@@ -53,6 +56,7 @@ export default {
       ],
       articleList: [],
       currentPage: 1,
+
       articleTotal: 0,
       articleTypeList: [
         {
@@ -72,7 +76,22 @@ export default {
           label: "node"
         }
       ],
-      articleTypeValue: "all"
+      articleTypeValue: "all",
+      articleStateValue: -1,
+      articleStateList: [
+        {
+          value: -1,
+          label: "状态"
+        },
+        {
+          value: 0,
+          label: "对外隐藏"
+        },
+        {
+          value: 1,
+          label: "对外显示"
+        }
+      ]
     };
   },
   created() {
@@ -85,7 +104,11 @@ export default {
     getArticleList() {
       this.$netWork.get(
         "/api/articleList",
-        { page: this.currentPage, type: this.articleTypeValue },
+        {
+          page: this.currentPage,
+          type: this.articleTypeValue,
+          show_state: this.articleStateValue
+        },
         data => {
           if (data.code == 0) {
             this.articleList = data.data.rows;
@@ -97,8 +120,6 @@ export default {
       );
     },
     editArticle(id) {
-      console.log(id);
-      console.log(this.$router);
       this.$router.push("/admin/edit_article/" + id);
     },
     gotoPage(index) {
@@ -106,7 +127,9 @@ export default {
       this.getArticleList();
     },
     selectClass(value) {
-      console.log(value);
+      this.getArticleList();
+    },
+    selectState(value) {
       this.getArticleList();
     }
   }

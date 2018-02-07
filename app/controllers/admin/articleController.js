@@ -3,11 +3,16 @@ let Article = require('../../models/Article');
 let db = require('../../libs/db');
 
 var articleList = async (ctx, next) => {
-    let { page, type } = ctx.query;
+    let { page, type, show_state } = ctx.query;
     page = page || 1;
-    let where = '';
+    show_state = show_state || 1; //默认显示对外展示的
+    let where = ``;
+    if (show_state == 0 || (show_state && show_state != -1)) {
+        where += where ? ` and show_state=${show_state}` :
+            `where show_state = ${show_state}`;
+    }
     if (type && type != 'all') {
-        where = `where JSON_CONTAINS(tags,'["${type}"]')`;
+        where += where ? ` and JSON_CONTAINS(tags,'["${type}"]')` : `where JSON_CONTAINS(tags,'["${type}"]')`
     }
     let sqlCount = `select count(*) as count from article ${where}`
     let sqlRows = `select title,intro,tags,id,createdAt,updatedAt from article ${where} limit ${10 * (page - 1)},10`;
@@ -15,8 +20,6 @@ var articleList = async (ctx, next) => {
     var rows = [],
         count = 0;
     await db.sequelize.query(sqlCount, { type: db.sequelize.QueryTypes.SELECT }).then(res => {
-        console.log('---------');
-        console.log(res);
         count = res[0].count;
         console.log(count);
     });
@@ -41,57 +44,47 @@ var getArticle = async (ctx, next) => {
     });
 }
 var editArticle = async (ctx, next) => {
-    var { id, title, intro, tags, description } = ctx.request.body;
-    var tctx = ctx;
-    var article = await Article.findAll({
+    var { id, title, intro, tags, description, show_state } = ctx.request.body;
+    let params = {
+        title,
+        intro,
+        tags,
+        description,
+        show_state
+    }
+    var article = await Article.update(params, {
         where: {
             id: id
         }
-    }).then(async (article) => {
+    }).then(article => {
         if (article.length > 0) {
-            await (async () => {
-                article = article[0];
-                article.title = title;
-                article.intro = intro;
-                article.tags = tags;
-                article.description = description;
-                await article.save();
-                console.log('已经更新了');
-            })().then(() => {
-                console.log('准备回复了');
-                tctx.rest({ code: 0, data: {}, msg: '更新成功' });
-            }).catch((err) => {
-                tctx.rest({ code: 1, data: {}, msg: '更新失败' })
-                console.log('更新异常' + err);
-            });
+            ctx.rest({ code: 0, data: {}, msg: '更新成功' });
         } else {
-            tctx.rest({ code: 2, data: {}, msg: '文章不存在' });
+            ctx.rest({ code: 2, data: {}, msg: '文章不存在' });
         }
     }).catch(err => {
         console.log(err);
-        tctx.rest({ code: 3, data: {}, msg: '网络异常' });
+        ctx.rest({ code: 3, data: {}, msg: '网络异常' });
     });
 
 }
 var createArticle = async (ctx, next) => {
     var col = ctx.request.body;
-    var { title, intro, tags, description } = col;
+    var { title, intro, tags, description, show_state } = col;
     var params = {
         title: title || '',
         intro: intro || '',
         tags: tags || '',
-        description: description || ''
+        description: description || '',
+        show_state: show_state || 1
     };
-    var tctx = ctx;
-    await (async (ctx, next) => {
-        await Article.create(params).then(function () {
-            console.log('创建文章成功');
-            tctx.rest({ code: 0, data: {}, msg: '创建文章成功' });
-        }).catch((err) => {
-            console.log(`创建文章失败`);
-            console.log(err);
-        })
-    })();
+    await Article.create(params).then(function () {
+        console.log('创建文章成功');
+        ctx.rest({ code: 0, data: {}, msg: '创建文章成功' });
+    }).catch((err) => {
+        console.log(`创建文章失败`);
+        console.log(err);
+    })
 }
 
 module.exports = {

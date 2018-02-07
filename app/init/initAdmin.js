@@ -39,7 +39,7 @@ var pwd = hash.digest('hex');
             is_admin: 'true',
             passwd: pwd,
             email: '920430764@qq.com',
-            authority: `['article_list','create_article']`
+            authority: `['article_list','create_article','edit_article',user_list','create_user']`
         }).then(function (p) {
             console.log('initadmin:' + JSON.stringify(p));
         }).catch(function (err) {

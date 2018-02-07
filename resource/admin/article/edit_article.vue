@@ -15,6 +15,11 @@
                 <Checkbox label="vue"></Checkbox>
             </CheckboxGroup>
         </FormItem>
+        <FormItem label="对外显示">
+          <RadioGroup v-model="formValidate.show_state">
+            <Radio :label="item.value" :key="index" v-for="(item,index) in showStateList">{{item.label}}</Radio>
+          </RadioGroup>
+        </FormItem>
          <div class="edit_box">
           <UE :defaultMsg='ueditConfig.content' :config = 'ueditConfig'  ref="ueditor"></UE>
         </div>
@@ -35,7 +40,8 @@ export default {
         title: "",
         intro: "",
         tags: [],
-        description: ""
+        description: "",
+        show_state: 1
       },
       ruleValidate: {
         title: [
@@ -71,7 +77,17 @@ export default {
         ueditStyle: {
           marginLeft: "80px"
         }
-      }
+      },
+      showStateList: [
+        {
+          value: 0,
+          label: "对外展示"
+        },
+        {
+          value: 1,
+          label: "对外隐藏"
+        }
+      ]
     };
   },
   created() {

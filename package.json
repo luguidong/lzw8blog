@@ -10,8 +10,7 @@
         "build": "webpack --progress --hide-modules --config build/webpack.views.prod.js",
         "build_admin": "webpack --progress --hide-modules --config build/webpack.admin.prod.js",
         "vue": "webpack --progress --hide-modules --config build/webpack.copy.js",
-        "lzw": "node app.js set process.env.NODE_ENV = production",
-        "analyz": "webpack-bundle-analyzer bundle/output/path/stats.json"
+        "lzw": "node app.js set process.env.NODE_ENV = production"
     },
     "keywords": [
         "koa",
