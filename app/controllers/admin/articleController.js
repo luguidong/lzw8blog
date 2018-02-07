@@ -5,7 +5,7 @@ let db = require('../../libs/db');
 var articleList = async (ctx, next) => {
     let { page, type, show_state } = ctx.query;
     page = page || 1;
-    show_state = show_state || 1; //默认显示对外展示的
+    show_state = show_state || 0; //默认显示对外展示的
     let where = ``;
     if (show_state == 0 || (show_state && show_state != -1)) {
         where += where ? ` and show_state=${show_state}` :
