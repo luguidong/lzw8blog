@@ -26,7 +26,7 @@
         <FormItem>
             <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
             <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
-        </FormItem>
+        </FormItem> 
         
     </Form>
     </div>
@@ -52,7 +52,20 @@ export default {
           }
         ],
         intro: [],
-        tags: [],
+        tags: [
+          {
+            required: true,
+            type: "array",
+            message: "Choose at least one hobby",
+            trigger: "change"
+          },
+          {
+            type: "array",
+            max: 2,
+            message: "Choose two hobbies at best",
+            trigger: "change"
+          }
+        ],
         show_state: []
       },
       ueditConfig: {
