@@ -15,11 +15,7 @@
                 <Checkbox label="vue"></Checkbox>
             </CheckboxGroup>
         </FormItem>
-        <FormItem label="对外显示" prop="show_state">
-          <RadioGroup v-model="formValidate.show_state">
-            <Radio :label="item.value" :key="index" v-for="(item,index) in showStateList">{{item.label}}</Radio>
-          </RadioGroup>
-        </FormItem>
+        
          <div class="edit_box">
           <UE :defaultMsg='ueditConfig.content' :config = 'ueditConfig'  ref="ueditor"></UE>
         </div>
