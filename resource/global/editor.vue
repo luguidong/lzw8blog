@@ -73,6 +73,7 @@ export default {
 
             "simpleupload",
             "insertframe",
+            'insertcode',
             "emotion",
             "|",
 

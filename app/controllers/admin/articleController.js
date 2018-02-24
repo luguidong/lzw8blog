@@ -38,6 +38,7 @@ var getArticle = async (ctx, next) => {
             id: id
         }
     }).then(article => {
+        console.log(article[0]);
         ctx.rest({ code: 0, data: article[0], msg: '获取成功' });
     }).catch(err => {
         console.log(err);
