@@ -26,7 +26,7 @@
         <FormItem>
             <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
             <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
-        </FormItem>
+        </FormItem> 
         
     </Form>
     </div>
@@ -40,8 +40,8 @@ export default {
         title: "",
         intro: "",
         tags: [],
-        description: "",
-        show_state: 1
+        show_state: 1,
+        description: ""
       },
       ruleValidate: {
         title: [
@@ -65,7 +65,8 @@ export default {
             message: "Choose two hobbies at best",
             trigger: "change"
           }
-        ]
+        ],
+        show_state: []
       },
       ueditConfig: {
         title: "详情",
