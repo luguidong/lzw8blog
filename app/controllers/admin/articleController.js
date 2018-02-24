@@ -32,13 +32,12 @@ var articleList = async (ctx, next) => {
 
 var getArticle = async (ctx, next) => {
     var id = ctx.query.id;
-    console.log(id);
     await Article.findAll({
         where: {
             id: id
         }
     }).then(article => {
-        console.log(article[0]);
+        console.log(article[0].tags);
         ctx.rest({ code: 0, data: article[0], msg: '获取成功' });
     }).catch(err => {
         console.log(err);
