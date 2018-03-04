@@ -24,10 +24,13 @@ export default {
       }
     }
   },
+  created() {},
   mounted() {
     const _this = this;
     this.initEditor();
+
     this.editor = UE.getEditor("editor", this.config); // 初始化UE
+
     this.editor.addListener("ready", function() {
       //console.log("打算放入内容");
       _this.editorReady = true;
@@ -73,7 +76,7 @@ export default {
 
             "simpleupload",
             "insertframe",
-            'insertcode',
+            "insertcode",
             "emotion",
             "|",
 
