@@ -37,6 +37,9 @@ var getArticle = async (ctx, next) => {
             id: id
         }
     }).then(article => {
+        if (typeof article[0].tags === 'string') {
+            article[0].tags = JSON.parse(article[0].tags);
+        }
         ctx.rest({ code: 0, data: article[0], msg: '获取成功' });
     }).catch(err => {
         console.log(err);
