@@ -10,10 +10,6 @@ import './resource/css/style.css';
 import './resource/css/iview.css';
 import iView from 'iview';
 
-import "./public/ueditor/ueditor.config.js";
-import "./public/ueditor/ueditor.all.min.js";
-import "./public/ueditor/lang/zh-cn/zh-cn.js";
-
 Vue.use(iView);
 Vue.use(VueRouter);
 Vue.use(Bus);

@@ -24,23 +24,43 @@ export default {
       }
     }
   },
-  created() {},
+  created() {
+    //if (!document.querySelector("#ueditorEl")) {
+    let tempBody = document.querySelector("body");
+    let tempConfig = document.createElement("script");
+    tempConfig.src = "/public/ueditor/ueditor.config.js";
+    tempConfig.setAttribute("id", "ueditorEl");
+    let tempEdit = document.createElement("script");
+    tempEdit.src = "/public/ueditor/ueditor.all.min.js";
+    let tempLang = document.createElement("script");
+    tempLang.src = "/public/ueditor/lang/zh-cn/zh-cn.js";
+    tempBody.appendChild(tempConfig);
+    tempBody.appendChild(tempEdit);
+    tempBody.appendChild(tempLang);
+    //}
+  },
   mounted() {
     const _this = this;
-    this.initEditor();
-
-    this.editor = UE.getEditor("editor", this.config); // 初始化UE
-
-    this.editor.addListener("ready", function() {
-      //console.log("打算放入内容");
-      _this.editorReady = true;
-      _this.editor.setContent(_this.defaultMsg); // 确保UE加载完成后，放入内容。
-    });
+    let editDownFlag = setInterval(() => {
+      try {
+        this.initEditor();
+        this.editor = UE.getEditor("editor", this.config); // 初始化UE
+        this.editor.addListener("ready", function() {
+          //console.log("打算放入内容");
+          _this.editorReady = true;
+          _this.editor.setContent(_this.defaultMsg); // 确保UE加载完成后，放入内容。
+          console.log(_this.defaultMsg);
+        });
+      } catch (e) {
+        console.log("还在加载中,请稍候");
+      }
+    }, 100);
   },
   watch: {
     defaultMsg(newVal) {
       if (this.editorReady) {
         this.editor.setContent(this.defaultMsg);
+        console.log("设置内容");
       }
     }
   },
