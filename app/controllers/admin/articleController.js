@@ -45,6 +45,19 @@ var getArticle = async (ctx, next) => {
         console.log(err);
     });
 }
+var deleteArticle = async (ctx, next) => {
+    var { id } = ctx.request.body;
+    await Article.destroy({
+        where: {
+            id: id
+        }
+    }).then(num => {
+        console.log('删除情况' + num);
+        ctx.rest({ code: 0, data: {}, msg: '删除成功' });
+    }).catch(err => {
+        ctx.rest({ code: 1, data: { err: err }, msg: '删除异常' });
+    })
+}
 var editArticle = async (ctx, next) => {
     var { id, title, intro, tags, description, show_state } = ctx.request.body;
     let params = {
@@ -93,5 +106,6 @@ module.exports = {
     'GET /api/articleList': articleList,
     'GET /api/getArticleInfo': getArticle,
     'POST /api/createArticle': createArticle,
-    'POST /api/editArticle': editArticle
+    'POST /api/editArticle': editArticle,
+    'POST /api/deleteArticle': deleteArticle
 }

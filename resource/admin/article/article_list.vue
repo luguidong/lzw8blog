@@ -49,6 +49,21 @@ export default {
                   }
                 },
                 "编辑"
+              ),
+              h(
+                "Button",
+                {
+                  props: {
+                    type: "ghost",
+                    value: params.row.id
+                  },
+                  on: {
+                    click: () => {
+                      this.deleteArticle(params.row.id);
+                    }
+                  }
+                },
+                "删除"
               )
             ]);
           }
@@ -118,6 +133,12 @@ export default {
           }
         }
       );
+    },
+    deleteArticle(id) {
+      this.$netWork.pPost("/api/deleteArticle", { id: id }).then(data => {
+        this.$Message.info("删除成功");
+        this.getArticleList();
+      });
     },
     editArticle(id) {
       this.$router.push("/admin/edit_article/" + id);
